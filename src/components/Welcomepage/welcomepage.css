@@ -1,0 +1,233 @@
+.brandLogo {
+  width: 60px;
+}
+
+.welcomeNavbarContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 20px 0 20px;
+}
+
+.navbarSearchContainer {
+  width: 100%;
+  height: 36px;
+  margin: 0 10px;
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 8px;
+  border-color: #33272a;
+  display: flex;
+  justify-content: space-between;
+  transition: 0.3s;
+}
+
+.navbarSearchInput {
+  background-color: transparent;
+  color: #33272a;
+  border-style: none;
+  width: 100%;
+  margin-left: 10px;
+  font-size: 15px;
+}
+
+.navbarSearchInput:focus {
+  outline: none;
+}
+
+.navbarSearchContainer:focus-within {
+  border-color: #ff8ba7;
+  transition: 0.3s;
+}
+
+.navbarSearchIcon {
+  align-self: center;
+  margin-left: 10px;
+}
+
+.mainWelcomePageContainer {
+  overflow-x: hidden;
+}
+
+.welcomeCategoriesContainer {
+  margin: 5px 20px 0 20px;
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.welcomeBrandsContainer {
+  margin: 5px 20px 20px;
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.eachCategoryImage {
+  width: 100%;
+  height: 110px;
+  border-radius: 10px 10px 0 0;
+}
+
+.eachBrandImage {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px 10px 0 0;
+}
+
+.eachCategoryContainer {
+  border-radius: 10px;
+  background-color: #ffc6c7;
+  width: 31.3%;
+  margin: 0 1% 10px 1%;
+}
+
+.eachBrandContainer {
+  border-radius: 10px;
+  background-color: #ffc6c7;
+  width: 120px;
+  margin: 0 4px 0 4px;
+  border-style: solid;
+  border-color: #33272a;
+}
+
+.eachCategoryPara {
+  margin: 0;
+  text-align: center;
+  font-weight: 500;
+  color: #594a4e;
+  padding: 5px 0;
+  font-size: 16px;
+}
+
+.eachBrandPara {
+  margin: 0;
+  text-align: center;
+  font-weight: 500;
+  color: #594a4e;
+  padding: 5px 0;
+  font-size: 16px;
+  overflow: hidden;
+}
+
+.welcomePageHeadings {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  color: #33272a;
+  margin: 20px 0 0 0;
+}
+
+.welcomePageGenderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcomePageGenderImages {
+  width: 110px;
+  transition: 0.3s;
+}
+
+.welcomePageGenderImages:hover {
+  width: 115px;
+  transition: 0.3s;
+}
+
+.welcomePageGenderButton {
+  border: none;
+  background-color: transparent;
+  border-radius: 100px;
+  margin: 0 5px 0 5px;
+  transition: 0.3s;
+}
+
+.eachColorContainer {
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  border-radius: 25px;
+}
+
+.welcomePageGenderButton:hover {
+  background-color: #ff8ba7;
+  transition: 0.3s;
+}
+
+.welcomePageColorsContainer {
+  margin: 5px 20px 10px 20px;
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.eachColorName {
+  position: absolute;
+  opacity: 0;
+  transition: 0.9s;
+  width: 0;
+  height: 0;
+}
+
+.eachColorContainer:hover + .eachColorName {
+  position: absolute;
+  opacity: 1;
+  margin: 0;
+  transition: 0.9s;
+}
+
+.welcomePageAllProductsContainer {
+  margin: 20px;
+  border-radius: 10px;
+}
+
+.welcomePageAllProductsSubContainer{
+  border-radius: 10px;
+  background-image: linear-gradient(45deg, #fffffe 20%, #594a4e 90%);
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  color: #33272a;
+}
+
+.welcomePagebagImage{
+  width: 70px;
+}
+
+.welcomePageBagPara{
+  margin: 0;
+  width: 60%;
+  align-self: center;
+  font-weight: 600;
+}
+
+.welcomePagebagButton{
+  border: none;
+  background-color: #E63975;
+  padding: 7px 12px;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #ffffff;
+  margin: 3px;
+  width: 100%;
+}
+
+.welcomePageAllBagContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+.welcomeBrandsContainer {
+  scrollbar-width: 0;
+}
+
+/* Chrome, Edge, and Safari */
+.welcomeBrandsContainer::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}

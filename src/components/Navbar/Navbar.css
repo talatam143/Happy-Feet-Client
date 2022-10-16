@@ -1,0 +1,19 @@
+.para{
+    margin: 0;
+}
+
+.navbarButtons{
+    background-color: transparent;
+    border-style: none;
+}
+
+.navbarContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 10px 10px 10px;
+    padding: 0 15px;
+    height: 65px;
+    background-color: #ffc6c7;
+    border-radius: 50px;
+}

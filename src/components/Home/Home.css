@@ -1,0 +1,11 @@
+.homeNavbarContainer {
+  background-color: #faeee7;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.homeContainer{
+  padding-bottom: 90px;
+}
+

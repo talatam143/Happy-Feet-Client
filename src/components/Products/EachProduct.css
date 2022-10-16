@@ -1,0 +1,24 @@
+.eachProductImage{
+    width: 100%;
+    height: 210px;
+    border-radius: 8px 8px 0 0;
+}
+
+.eachProductContainer{
+    width: 48%;
+    background-color: #ffc6c7;
+    margin: 1%;
+    border-radius: 8px ;
+}
+
+.eachProductDarkPara{
+    margin: 5px 0 5px 5px;
+    font-weight: 600;
+    color: #33272a;
+
+}
+
+.eachProductLightPara{
+    margin: 5px 0 0 5px;
+    color: #594a4e;
+}

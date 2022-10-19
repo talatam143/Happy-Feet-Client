@@ -12,22 +12,22 @@ function Navbar() {
     <div className="navbarContainer">
       <Link to="/">
         <button className="navbarButtons">
-          <HomeIcon color={location.pathname === "/" ? "#e53170" : "#594a4e"} />
+          <HomeIcon color={location.pathname === "/" ? "#e53170" : "#33272a"} />
         </button>
       </Link>
       <Link to="/wishlist">
         <button className="navbarButtons">
-          <WishlistIcon color={location.pathname === "/wishlist" ? "#e53170" : "#594a4e"} />
+          <WishlistIcon color={location.pathname === "/wishlist" ? "#e53170" : "#33272a"} />
         </button>
       </Link>
       <Link to="/cart">
         <button className="navbarButtons">
-          <CartIcon color={location.pathname === "/cart" ? "#e53170" : "#594a4e"} />
+          <CartIcon color={location.pathname === "/cart" ? "#e53170" : "#33272a"} />
         </button>
       </Link>
       <Link to="/account">
         <button className="navbarButtons">
-          <UserIcon color={location.pathname === "/account" ? "#e53170" : "#594a4e"} />
+          <UserIcon color={location.pathname === "/account" ? "#e53170" : "#33272a"} />
         </button>
       </Link>
     </div>

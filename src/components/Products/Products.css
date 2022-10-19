@@ -1,5 +1,139 @@
-.productsContainer{
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 5px;
+.productsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 5px;
+}
+
+.productsFilterButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  background-color: #faeee7;
+  border: none;
+  bottom: 80px;
+  right: 10px;
+  border-radius: 6px;
+  padding: 8px 12px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.productsFilterContainer {
+  background-color: #fffffe;
+  height: 100vh;
+  width: 100vw;
+}
+
+.productsFilterHeader {
+  display: flex;
+  align-items: center;
+  padding: 7px 5px;
+  font-weight: 500;
+  font-size: 18px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 11px 12px 0px;
+}
+
+.productsFilterHeaderPara {
+  margin: 0 0 0 15px;
+}
+
+.productsFilterBackButton {
+  background-color: transparent;
+  border: none;
+}
+
+.productsFiltersBodyContainer {
+  display: flex;
+}
+
+.productsFiltersCheckBoxesContainer {
+  width: 70%;
+  padding: 10px 0 10px 5px;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.productsFiltersHeading {
+  margin: 0;
+  padding: 7px 0 7px 5px;
+  color: #33272a;
+  font-weight: 500;
+}
+
+.selectedProductsFiltersHeading {
+  background-color: #fffffe;
+  margin: 0;
+  padding: 7px 0 7px 5px;
+  color: #33272a;
+  font-weight: 500;
+}
+
+
+.productsFilterGenderResetButton{
+  margin: 10px;
+  background-color: transparent;
+  border: solid 1px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.productFiltersEachRadioDiv{
+  display: flex;
+  align-items: center;
+  margin: 0 0 10px 0;
+  padding: 3px;
+}
+
+.productColorFilterLabel{
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  margin: 0 10px 0 0;
+}
+
+.productsFilterColorsCheckBox{
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+}
+
+.productsFiltersHeadingsContainer {
+  width: 30%;
+  background-color: #faeee7;
+  height: 100vh;
+}
+
+.productsFilterFooterContainer{
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  background-color: #fffffe;
+  width: 100%;
+  padding: 10px 0px;
+}
+
+.productsFilterResetButton{
+  background-color: transparent;
+  border: solid 1px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  color: #594a4e;
+  width: 30%;
+  height: 45px;
+  margin: 0 5px;
+}
+
+.productsFilterApplyButton{
+  background-color: #ff8ba7;
+  border: solid 1px;
+  font-size: 17px;
+  font-weight: 600;
+  border-radius: 8px;
+  color: #fffffe;
+  width: 60%;
+  height: 45px;
+  margin: 0 5px;
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { ToggleWishListIcon } from "../SVG/svgrepo";
 import "./EachProduct.css";
 
 function EachProduct(props) {
@@ -10,7 +11,10 @@ function EachProduct(props) {
         alt="product"
         className="eachProductImage"
       />
-      <p className="eachProductDarkPara">{data.brand_details.name}</p>
+      <div className="eachProductBrandWhishListContainer">
+        <p className="eachProductDarkPara">{data.brand_details.name}</p>
+        <ToggleWishListIcon color="#33272a" />
+      </div>
       <p className="eachProductLightPara">{data.name}</p>
       <p className="eachProductDarkPara">Rs. {data.price}</p>
     </div>

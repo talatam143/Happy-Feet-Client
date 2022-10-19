@@ -145,7 +145,6 @@
 .eachColorContainer {
   width: 40px;
   height: 40px;
-  margin: 5px;
   border-radius: 25px;
 }
 
@@ -161,21 +160,6 @@
   flex-wrap: wrap;
 }
 
-.eachColorName {
-  position: absolute;
-  opacity: 0;
-  transition: 0.9s;
-  width: 0;
-  height: 0;
-}
-
-.eachColorContainer:hover + .eachColorName {
-  position: absolute;
-  opacity: 1;
-  margin: 0;
-  transition: 0.9s;
-}
-
 .welcomePageAllProductsContainer {
   margin: 20px;
   border-radius: 10px;
@@ -183,7 +167,7 @@
 
 .welcomePageAllProductsSubContainer{
   border-radius: 10px;
-  background-image: linear-gradient(45deg, #fffffe 20%, #594a4e 90%);
+  background-image: linear-gradient(45deg, #faeee7 25%, #594a4e 80%);
   display: flex;
   justify-content: space-between;
   padding: 5px 10px;
@@ -191,7 +175,7 @@
 }
 
 .welcomePagebagImage{
-  width: 70px;
+  width: 90px;
 }
 
 .welcomePageBagPara{
@@ -204,7 +188,7 @@
 .welcomePagebagButton{
   border: none;
   background-color: #E63975;
-  padding: 7px 12px;
+  padding: 10px 14px;
   border-radius: 5px;
   font-weight: 600;
   font-size: 15px;
@@ -218,6 +202,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+}
+
+.welcomePageColorLinks{
+  border-radius: 50px;
+  margin: 5px;
 }
 
 /* ===== Scrollbar CSS ===== */

@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { setFilters } from "../../stateslices/filtersSlice";
 
 import logo from "../../images/clientLogo.svg";
 import Category from "./Category";
@@ -12,7 +14,7 @@ import "./welcomepage.css";
 import Brand from "./Brand";
 import man from "../../images/man.png";
 import woman from "../../images/woman.png";
-import Bag from "../../images/bag.png"
+import Bag from "../../images/bag.png";
 
 function Welcomepage() {
   const pageState = useSelector((state) => state.pageState);
@@ -20,6 +22,7 @@ function Welcomepage() {
   const [brandsList, setbrandsList] = useState([]);
   const [colorsList, setColorsList] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getCategoriesandBrands();
@@ -31,6 +34,15 @@ function Welcomepage() {
       setcategoriesList(data.categoriesList);
       setbrandsList(data.brandsList);
       setColorsList(data.colorsList);
+      let categoriesNames = [];
+      let brandNames = [];
+      let colorsNames = []
+      data.categoriesList.map((eachCategory) =>
+        categoriesNames.push(eachCategory.name)
+      );
+      data.brandsList.map((eachBrand) => brandNames.push(eachBrand.name));
+      data.colorsList.map((eachColor) => colorsNames.push(eachColor));
+      dispatch(setFilters({categoriesNames,brandNames,colorsNames}))
     }
   };
 
@@ -50,24 +62,24 @@ function Welcomepage() {
       {pageState.success && (
         <>
           <motion.div
-            initial={{ opacity: 0, scale: 0.5, y: 100 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 100, duration: 0.1 }}
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
           >
-            <p className="welcomePageHeadings">Categories</p>
+            <p className="welcomePageHeadings">Shop by Categories</p>
             <div className="welcomeCategoriesContainer">
               {categoriesList.map((eachCategory) => (
                 <Category details={eachCategory} key={eachCategory.id} />
               ))}
             </div>
-            <p className="welcomePageHeadings">Brands</p>
+            <p className="welcomePageHeadings">Shop by Brands</p>
             <div className="welcomeBrandsContainer">
               {brandsList.map((eachBrand) => (
                 <Brand details={eachBrand} key={eachBrand.id} />
               ))}
             </div>
           </motion.div>
-          <p className="welcomePageHeadings">Gender</p>
+          <p className="welcomePageHeadings">Shop by Gender</p>
           <div className="welcomePageGenderContainer">
             <Link
               className="globalLinks welcomePageGenderButton"
@@ -91,33 +103,45 @@ function Welcomepage() {
               />
             </Link>
           </div>
-          <p className="welcomePageHeadings">Colors</p>
+          <p className="welcomePageHeadings">Shop by Colors</p>
           <div className="welcomePageColorsContainer">
             {colorsList.map((eachColor) => (
               <Link
                 key={eachColor}
-                className="globalLinks"
+                className="globalLinks welcomePageColorLinks"
                 to={`/products?color=${eachColor}`}
               >
                 <Box
                   sx={{ boxShadow: 7, backgroundColor: eachColor }}
                   className="eachColorContainer"
                 ></Box>
-                <p className="eachColorName" style={{ color: eachColor }}>
-                  {eachColor}
-                </p>
               </Link>
             ))}
           </div>
-            <Box className="welcomePageAllProductsContainer" sx={{boxShadow:2}}>
-              <div className="welcomePageAllProductsSubContainer">
-                  <p className="welcomePageBagPara">Don't know what to choose...?</p>
-                  <div className="welcomePageAllBagContainer">
-                    <img src={Bag} alt="shoppingBag" className="welcomePagebagImage"/>
-                    <button className="welcomePagebagButton" onClick={()=> navigate("/products")}>Shop All</button>
-                  </div>
+          <Box
+            className="welcomePageAllProductsContainer"
+            sx={{ boxShadow: 2 }}
+          >
+            <div className="welcomePageAllProductsSubContainer">
+              <p className="welcomePageBagPara">
+                Don't know what to choose. Click on Shop All to view all our
+                collection.
+              </p>
+              <div className="welcomePageAllBagContainer">
+                <img
+                  src={Bag}
+                  alt="shoppingBag"
+                  className="welcomePagebagImage"
+                />
+                <button
+                  className="welcomePagebagButton"
+                  onClick={() => navigate("/products")}
+                >
+                  Shop All
+                </button>
               </div>
-            </Box>
+            </div>
+          </Box>
         </>
       )}
     </div>

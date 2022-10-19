@@ -15,10 +15,17 @@
     margin: 5px 0 5px 5px;
     font-weight: 600;
     color: #33272a;
+    font-size: 15px;
 
 }
 
 .eachProductLightPara{
     margin: 5px 0 0 5px;
     color: #594a4e;
+    font-size: 14px;
+}
+.eachProductBrandWhishListContainer{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px 0 0;
 }

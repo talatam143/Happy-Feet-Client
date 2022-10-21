@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 
 import { getProducts } from "../../api/Products";
-import { ArrowLeft, FilterIcon } from "../SVG/svgrepo";
+import { ArrowLeft, FilterIcon, SortIcon } from "../SVG/svgrepo";
 import EachProduct from "./EachProduct";
 import "./Products.css";
 
@@ -21,7 +21,7 @@ const initialFilterList = {
   gender: "",
 };
 
-const categories = ["Gender", "Category", "Brands", "Color"];
+const categories = ["Gender", "Category", "Brand", "Color"];
 
 function Products() {
   const [searchParams] = useSearchParams();
@@ -30,6 +30,7 @@ function Products() {
   const [filters, setFilters] = useState(initialFilterList);
   const [products, setProducts] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
+  const [showSort, setShowSort] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
   useEffect(() => {
@@ -56,11 +57,30 @@ function Products() {
     if (searchParams.get("color") !== null) {
       filterData.color = searchParams.get("color");
     }
+    if (searchParams.get("price") !== null) {
+      filterData.price = searchParams.get("price");
+    }
     setFilters(filterData);
     const { status, productData } = await getProducts(filterData);
     if (status === 200) {
       setProducts(productData);
     }
+  };
+
+  const handleSortChange = (e) => {
+    setFilters({ ...filters, [e.target.name]: e.target.value });
+    let formattedBrands = filters.brand.replace(/&/g, "@");
+    navigate({
+      pathname: "",
+      search: createSearchParams({
+        color: filters.color,
+        gender: filters.gender,
+        category: filters.category,
+        brand: formattedBrands,
+        price: e.target.value,
+      }).toString(),
+    });
+    setShowSort(false);
   };
 
   const handleFilterChange = (e) => {
@@ -76,6 +96,7 @@ function Products() {
       if (isFilterPresent) {
         let getFilters = filters[e.target.name].split("%23");
         let newFiltersList = [];
+        // eslint-disable-next-line array-callback-return
         getFilters.map((eachGetFilter) => {
           if (eachGetFilter.replace(/%20/g, " ") !== e.target.value) {
             newFiltersList.push(eachGetFilter);
@@ -101,16 +122,26 @@ function Products() {
   };
 
   const applyFilters = () => {
+    let formattedBrands = filters.brand.replace(/&/g, "@");
     navigate({
       pathname: "",
       search: createSearchParams({
         color: filters.color,
         gender: filters.gender,
         category: filters.category,
-        brand: filters.brand,
+        brand: formattedBrands,
+        price: filters.price,
       }).toString(),
     });
     setShowFilter(false);
+  };
+
+  const resetFilters = () => {
+    setFilters(initialFilterList);
+    setSelectedCategory(categories[0]);
+    navigate({
+      pathname: "",
+    });
   };
 
   const getPreviousCategories = (eachCategory) => {
@@ -125,7 +156,13 @@ function Products() {
 
   const getPreviousBrands = (eachBrand) => {
     let brands = filters.brand.split("%23");
-    let isPresent = brands.filter(
+    let formattedBrands = [];
+    for (let eachBrand of brands) {
+      let b = "";
+      b = eachBrand.replace(/%20/g, " ");
+      formattedBrands.push(b.replace(/@/g, "&"));
+    }
+    let isPresent = formattedBrands.filter(
       (eachFilter) => eachBrand === eachFilter.replace(/%20/g, " ")
     );
     if (isPresent.length === 1) {
@@ -147,7 +184,21 @@ function Products() {
     setFilters({ ...filters, gender: "" });
   };
 
-  console.log(filters);
+  const resetSort = () =>{
+    setFilters({ ...filters, price: "" });
+    let formattedBrands = filters.brand.replace(/&/g, "@");
+    navigate({
+      pathname: "",
+      search: createSearchParams({
+        color: filters.color,
+        gender: filters.gender,
+        category: filters.category,
+        brand: formattedBrands,
+        price: "",
+      }).toString(),
+    });
+    setShowSort(false)
+  }
 
   return (
     <div>
@@ -157,7 +208,7 @@ function Products() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="productsContainer">
+          <div className="productsContainer" onClick={() => setShowSort(false)}>
             {products.map((eachProduct) => (
               <EachProduct key={eachProduct._id} data={eachProduct} />
             ))}
@@ -168,9 +219,15 @@ function Products() {
       )}
       <button
         className="productsFilterButton"
-        onClick={() => setShowFilter(true)}
+        onClick={() => {
+          setShowFilter(true);
+          setSelectedCategory(categories[0]);
+        }}
       >
         <FilterIcon color="#33272a" />
+      </button>
+      <button className="productsSortButton" onClick={() => setShowSort(true)}>
+        <SortIcon color="#33272a" />
       </button>
       {showFilter && (
         <motion.div
@@ -242,23 +299,23 @@ function Products() {
                 )}
                 {selectedCategory === "Category" &&
                   fetchFilters.categories.map((eachCategory) => (
-                      <div
-                        key={eachCategory}
-                        className="productFiltersEachRadioDiv"
-                      >
-                        <input
-                          type="checkbox"
-                          value={eachCategory}
-                          name="category"
-                          onChange={handleFilterChange}
-                          id={eachCategory}
-                          checked={getPreviousCategories(eachCategory)}
-                          className="productsFilterColorsCheckBox"
-                        />
-                        <label htmlFor={eachCategory}>{eachCategory}</label>
-                      </div>
+                    <div
+                      key={eachCategory}
+                      className="productFiltersEachRadioDiv"
+                    >
+                      <input
+                        type="checkbox"
+                        value={eachCategory}
+                        name="category"
+                        onChange={handleFilterChange}
+                        id={eachCategory}
+                        checked={getPreviousCategories(eachCategory)}
+                        className="productsFilterColorsCheckBox"
+                      />
+                      <label htmlFor={eachCategory}>{eachCategory}</label>
+                    </div>
                   ))}
-                {selectedCategory === "Brands" &&
+                {selectedCategory === "Brand" &&
                   fetchFilters.brands.map((eachBrand) => (
                     <div key={eachBrand} className="productFiltersEachRadioDiv">
                       <input
@@ -298,7 +355,7 @@ function Products() {
             <div className="productsFilterFooterContainer">
               <button
                 className="productsFilterResetButton"
-                onClick={() => setFilters(initialFilterList)}
+                onClick={resetFilters}
               >
                 Reset
               </button>
@@ -308,6 +365,44 @@ function Products() {
               >
                 Apply Filters
               </button>
+            </div>
+          </div>
+        </motion.div>
+      )}
+      {showSort && (
+        <motion.div
+          initial={{ opacity: 0, y: 1000 }}
+          animate={{ opacity: 1, position: "fixed", top: 0, y: "75%" }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="productsFilterContainer">
+            <p className="filtersProductSortHeading">Sort By</p>
+            <div className="genderradioButton">
+              <div className="productFiltersEachRadioDiv">
+                <input
+                  type="radio"
+                  name="price"
+                  value="HIGH"
+                  id="highId"
+                  onChange={handleSortChange}
+                  checked={"HIGH" === filters.price}
+                />
+                <label htmlFor="highId">Price (highest first)</label>
+              </div>
+              <div className="productFiltersEachRadioDiv">
+                <input
+                  type="radio"
+                  name="price"
+                  value="LOW"
+                  id="lowId"
+                  onChange={handleSortChange}
+                  checked={"LOW" === filters.price}
+                />
+                <label htmlFor="lowId">Price (lowest first)</label>
+              </div>
+              <div className="sortResetButtonContainer">
+                <button className="sortResetButton" onClick={resetSort}>Reset</button>
+              </div>
             </div>
           </div>
         </motion.div>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +11,7 @@ import Cart from "./components/Cart/Cart";
 import Profile from "./components/Profile/Profile";
 import Products from "./components/Products/Products";
 import { getBrandsandCategories } from "./api/welcomePage";
+import Login from "./components/Login/Login";
 
 function App() {
   const location = useLocation();
@@ -48,6 +50,7 @@ function App() {
         <Route path="/account" element={<Profile />} />
         <Route path="/products" element={<Products />} />
       </Route>
+      <Route path="/login" element={<Login/>} />
     </Routes>
   );
 }

@@ -11,7 +11,7 @@ const server = process.env.REACT_APP_SERVER_URL;
 
 export const getProducts = async (fitersList) => {
   store.dispatch(loadingState());
-  const url = `${server}products/all?price=${fitersList.price}&gender=${fitersList.gender}&color=${fitersList.color}&brand=${fitersList.brand}&cateory=${fitersList.category}`;
+  const url = `${server}products/all?price=${fitersList.price}&gender=${fitersList.gender}&color=${fitersList.color}&brand=${fitersList.brand}&category=${fitersList.category}`;
   const options = {
     method: "GET",
   };

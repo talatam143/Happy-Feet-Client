@@ -1,0 +1,115 @@
+.accountHeading{
+    margin: 10px 0 0 10px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #33272a;
+}
+
+.accountDetailsContainer{
+    display: flex;
+    align-items: center;
+    top: 10px;
+    padding: 20px 10px;
+    margin: 10px 0;
+    background-color: #ffc6c7;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.accountDetailsUserIcon{
+    margin: 0;
+    background-color: #33272a;
+    padding: 10px 14px;
+    margin: 0 10px;
+    border-radius: 50px;
+    color: #ff8ba7;
+    font-size: 32px;
+    font-weight: 600;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.accountDetailsUserNoIcon{
+    margin: 0;
+    background-color: #33272a;
+    padding: 10px 15px;
+    margin: 0 10px;
+    border-radius: 50px;
+    color: #ff8ba7;
+    font-size: 32px;
+    font-weight: 600;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.accountDetailsParas{
+    margin: 0;
+    color: #594a4e;
+    font-size: 12px;
+    padding:2px 0;
+}
+
+.accountDetailsNameParas{
+    margin: 0;
+    color: #594a4e;
+    font-size: 16px;
+    padding:2px 0;
+    font-weight: 600;
+}
+
+.accountSpecialButtonContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 10px;
+}
+
+.accountSpecialButton{
+    background-color: #faeee7;
+    border: none;
+    border-radius: 2px;
+    padding: 4px 14px;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 2;
+}
+
+.accountNormalButtonContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.accountNormalButton{
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    font-weight: 500;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profileLogoutButton{
+    background-color: transparent;
+    border: solid 2px #33272a;
+    border-radius: 8px;
+    width: 90%;
+    height: 45px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #33272a;
+    margin-top: 20px;
+}
+
+.profileLogoutButtonContainer{
+    text-align: center;
+}
+
+.accountNormalButtonHr{
+    width: 100%;
+    height: 1px;
+    background-color: #33272a;
+    border: none;
+}

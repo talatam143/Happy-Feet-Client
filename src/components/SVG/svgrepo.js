@@ -42,11 +42,11 @@ export const CartIcon = (props) => {
 };
 
 export const WishlistIcon = (props) => {
-  const { color } = props;
+  const { color, size } = props;
   return (
     <svg
-      width="34"
-      height="34"
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       stroke-width="2"
       stroke={color}
@@ -61,11 +61,11 @@ export const WishlistIcon = (props) => {
 };
 
 export const UserIcon = (props) => {
-  const { color } = props;
+  const { color,size } = props;
   return (
     <svg
-      width="34"
-      height="34"
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       stroke-width="2"
       stroke={color}
@@ -165,3 +165,66 @@ export const ArrowLeft = () => {
     </svg>
   );
 };
+
+export const OrderBox = (props) => {
+  const { color, size } = props;
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke={color}
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3" />
+      <line x1="12" y1="12" x2="20" y2="7.5" />
+      <line x1="12" y1="12" x2="12" y2="21" />
+      <line x1="12" y1="12" x2="4" y2="7.5" />
+    </svg>
+  );
+};
+
+export const CouponIcon = (props) => {
+  const { color, size } = props;
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke={color}
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <line x1="15" y1="5" x2="15" y2="7" />
+      <line x1="15" y1="11" x2="15" y2="13" />
+      <line x1="15" y1="17" x2="15" y2="19" />
+      <path d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2" />
+    </svg>
+  );
+};
+
+export const RightIcon = () => {
+  return (
+    <svg
+      width="28"
+      height="28"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke="#33272a"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <polyline points="9 6 15 12 9 18" />
+    </svg>
+  );
+};
+

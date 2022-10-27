@@ -11,12 +11,14 @@ import Cart from "./components/Cart/Cart";
 import Profile from "./components/Profile/Profile";
 import Products from "./components/Products/Products";
 import { getBrandsandCategories } from "./api/welcomePage";
+import { getWishList } from "./api/WishListApi";
 import Login from "./components/Login/Login";
 
 function App() {
   const location = useLocation();
   const dispatch = useDispatch();
   const fetchFilters = useSelector((state) => state.filterState.haveFilters);
+  const user = useSelector((state) => state.userState);
 
   useEffect(() => {
     if (location.pathname === "/products") {
@@ -24,7 +26,15 @@ function App() {
         getCategoriesAndBrands();
       }
     }
+    if (user.isLoggedIn && !user.fetchedWishList) {
+      fetchWishList()
+    }
   }, [location]);
+
+  const fetchWishList = async() =>{
+    await getWishList();
+  }
+
 
   const getCategoriesAndBrands = async () => {
     const { status, data } = await getBrandsandCategories();
@@ -50,7 +60,7 @@ function App() {
         <Route path="/account" element={<Profile />} />
         <Route path="/products" element={<Products />} />
       </Route>
-      <Route path="/login" element={<Login/>} />
+      <Route path="/login" element={<Login />} />
     </Routes>
   );
 }

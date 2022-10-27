@@ -80,7 +80,7 @@ export const UserIcon = (props) => {
 };
 
 export const ToggleWishListIcon = (props) => {
-  const { color } = props;
+  const { color,fill } = props;
   return (
     <svg
       width="32"
@@ -88,7 +88,7 @@ export const ToggleWishListIcon = (props) => {
       viewBox="0 0 24 24"
       stroke-width="2"
       stroke={color}
-      fill="none"
+      fill={fill}
       stroke-linecap="round"
       stroke-linejoin="round"
     >

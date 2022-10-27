@@ -8,15 +8,17 @@ import {
 } from "../SVG/svgrepo";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./Profile.css";
 import { getAccount } from "../../api/Login";
+import {removeUser} from "../../stateslices/userSlice";
 
 function Profile() {
   const navigate = useNavigate();
   const pageState = useSelector((state) => state.pageState);
   const [userDetails, setUserDetails] = useState({});
+  const dispatch = useDispatch()
 
   useEffect(() => {
     let isLoggedIn = Cookies.get("HappyT");
@@ -37,7 +39,7 @@ function Profile() {
   };
 
   const handleLogout = () => {
-    Cookies.remove("HappyT");
+    dispatch(removeUser);
     navigate("/");
   };
 

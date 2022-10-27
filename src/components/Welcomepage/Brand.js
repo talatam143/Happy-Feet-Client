@@ -6,7 +6,7 @@ function Brand(props) {
 
   return (
     <div className="eachBrandContainer">
-    <Link className="globalLinks" to={`/products?brand=${details.name}`}>
+    <Link className="globalLinks" to={`/products?brand=${details.name.replace("&", "%40")}`}>
       <img
         src={`${process.env.REACT_APP_SERVER_URL}${details.image.filePath}`}
         alt="category-logo"

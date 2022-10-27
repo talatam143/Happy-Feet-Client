@@ -101,8 +101,6 @@ function Login() {
       setIsLoading(true);
       let { status, responseData } = await verifyOtp(data);
       if (status === 200) {
-        let token = responseData.token
-        Cookies.set('HappyT', token, { expires: 365 })
         navigate("/");
       } else if (status === 404){
         setIsLoading(false);

@@ -5,6 +5,7 @@ import {
   successState,
   failedState,
 } from "../stateslices/pageStateSlice";
+import { setUser } from "../stateslices/userSlice";
 
 const server = process.env.REACT_APP_SERVER_URL;
 
@@ -33,7 +34,13 @@ export const verifyOtp = async (data) => {
   };
   const response = await fetch(url, options);
   const responseData = await response.json();
-  return { responseData, status: response.status };
+  if (response.status === 200) {
+    store.dispatch(setUser(responseData))
+    return { responseData, status: response.status };
+  
+  } else {
+    return { responseData, status: response.status };
+  }
 };
 
 export const getAccount = async () => {

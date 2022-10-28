@@ -1,0 +1,66 @@
+.wishListHeadingPara {
+  margin: 0;
+  font-weight: 600;
+  font-size: 20px;
+  color: #33272a;
+}
+.wishListHeadingContainer {
+  background-color: #ffc6c7;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  position: fixed;
+  width: 100%;
+  height: 65px;
+  top: 0;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wishListContinueButton {
+  background-color: #ffc6c7;
+  border: solid 2px #33272a;
+  width: 80%;
+  height: 40px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.wishListNoItemsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  height: 75vh;
+}
+
+.wishListNoItemsDataContainer {
+  padding-top: 100px;
+}
+
+.wishListNoItemsDataContainerPara {
+  margin: 5px 0 0 0;
+  font-weight: 600;
+  font-size: 20px;
+  color: #33272a;
+}
+
+.wishListNoItemsDataContainerMiniPara {
+  margin: 5px 20px 0 20px;
+  font-size: 16px;
+  color: #594a4e;
+}
+
+.wishListProductsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 70px;
+}
+
+.wishListCountPara {
+  margin: -3px 0 0 0;
+  color: #594a4e;
+  font-weight: 600;
+}

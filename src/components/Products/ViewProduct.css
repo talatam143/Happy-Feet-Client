@@ -1,0 +1,147 @@
+.productViewBackContainer{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index:100;
+}
+.productViewBackIcon{
+    border: none;
+    background-color: transparent;
+}
+
+.productViewContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.productViewHeadingContainer{
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 20px 0 20px;
+}
+
+.productViewHeadingPara{
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+    color: #33272a;
+}
+
+.productViewHeadingPricePara{
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+    color: #33272a;
+    width: 25%;
+}
+
+.productViewBrandNamePara{
+    margin: 15px 0 0 20px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #33272a;
+}
+
+.productViewSelectSizePara{
+    margin: 5px 0 0 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #33272a;
+}
+
+.productViewSelectSizeContainer{
+    margin: 15px 20px 0 20px;
+}
+
+.eachSizeContainer{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 10px 0 10px;
+}
+
+.eachSizePara{
+    margin: 5px 10px 5px 0;
+    font-size: 18px;
+    border: solid 1px #594a4e;
+    border-radius: 10px;
+    padding: 10px 24px;
+}
+
+
+.eachSelectedSizePara{
+    margin: 8px 8px 8px 0;
+    font-size: 20px;
+    font-weight: 500;
+    border: solid 3px #594a4e;
+    border-radius: 10px;
+    padding: 7px 21px;
+}
+
+.productViewButtonsContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 20px 10px 20px;
+}
+
+.productViewAddToBagButton{
+    width: 90%;
+    background-color: #e53170;
+    color: #faeee7;
+    border: none;
+    height: 46px;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.productViewWishlistButton{
+    background-color: transparent;
+    border: solid 2px #33272a;
+    border-radius: 6px;
+}
+
+
+.swiper {
+  width: 90%;
+  height: 400px;
+  margin-top: 10px;
+  border-radius: 28px;
+  background: #faeee7;
+  box-shadow: 5px 5px 10px #afa7a2, -5px -5px 10px #ffffff;
+}
+
+.swiper-pagination-bullet {
+  width: 18px !important;
+  height: 5px !important;
+  border-radius: 3px !important;
+  transition: 0.4s !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #33272a !important;
+  transition: 0.4s !important;
+}
+
+.myMiniSwiper {
+  width: 320px;
+  height: 70px;
+  border-radius: 0px;
+  background: transparent;
+  box-shadow: none;
+  padding: 10px !important;
+}
+
+.swiperControlImages {
+  border-radius: 6px;
+}
+
+.myMiniSwiper .swiper-slide-thumb-active {
+  width: 55px !important;
+  height: 65px !important;
+  border: solid 2px #33272a !important;
+  border-radius: 6px !important;
+  padding: 0 !important;
+}

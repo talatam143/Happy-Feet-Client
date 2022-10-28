@@ -13,6 +13,7 @@ import Products from "./components/Products/Products";
 import { getBrandsandCategories } from "./api/welcomePage";
 import { getWishList } from "./api/WishListApi";
 import Login from "./components/Login/Login";
+import ViewProduct from "./components/Products/ViewProduct";
 
 function App() {
   const location = useLocation();
@@ -59,6 +60,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/account" element={<Profile />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/:id" element={<ViewProduct />} />
       </Route>
       <Route path="/login" element={<Login />} />
     </Routes>

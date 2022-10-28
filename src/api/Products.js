@@ -28,3 +28,23 @@ export const getProducts = async (fitersList) => {
     store.dispatch(failedState());
   }
 };
+
+export const getSingleProduct = async(id) =>{
+  store.dispatch(loadingState());
+  const url = `${server}products/${id}`;
+  const options = {
+    method: "GET",
+  };
+  const response = await fetch(url, options);
+  const responseData = await response.json();
+  if (response.status === 200) {
+    store.dispatch(successState());
+    return { status: response.status, productData: responseData.product };
+  } else if (response.status === 404) {
+    store.dispatch(errorApi(responseData));
+    store.dispatch(failedState());
+  } else {
+    store.dispatch(unknownApi());
+    store.dispatch(failedState());
+  }
+}

@@ -61,7 +61,7 @@ export const WishlistIcon = (props) => {
 };
 
 export const UserIcon = (props) => {
-  const { color,size } = props;
+  const { color, size } = props;
   return (
     <svg
       width={size}
@@ -80,7 +80,7 @@ export const UserIcon = (props) => {
 };
 
 export const ToggleWishListIcon = (props) => {
-  const { color,fill } = props;
+  const { color, fill } = props;
   return (
     <svg
       width="32"
@@ -149,10 +149,10 @@ export const SortIcon = (props) => {
 export const ArrowLeft = () => {
   return (
     <svg
-      width="34"
-      height="34"
+      width="45"
+      height="45"
       viewBox="0 0 24 24"
-      stroke-width="2"
+      stroke-width="2.5"
       stroke="#33272a"
       fill="none"
       stroke-linecap="round"
@@ -228,3 +228,24 @@ export const RightIcon = () => {
   );
 };
 
+export const DeleteIcon = () => {
+  return (
+    <svg
+      width="28"
+      height="28"
+      viewBox="0 0 24 24"
+      stroke-width="2.2"
+      stroke="#33272a"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <line x1="4" y1="7" x2="20" y2="7" />
+      <line x1="10" y1="11" x2="10" y2="17" />
+      <line x1="14" y1="11" x2="14" y2="17" />
+      <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+      <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+    </svg>
+  );
+};

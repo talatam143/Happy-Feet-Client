@@ -1,27 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import { ToggleWishListIcon } from "../SVG/svgrepo";
+import { DeleteIcon } from "../SVG/svgrepo";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
-import { addToWishList, removeFromWishList } from "../../api/WishListApi";
-import "./EachProduct.css";
+import { removeFromWishList } from "../../api/WishListApi";
+import "./EachWishList.css";
 import { useSelector } from "react-redux";
 
 function EachProduct(props) {
-  const { data } = props;
+  const { data,fetchWishListProducts } = props;
   const navigate = useNavigate();
   const user = useSelector((state) => state.userState);
-  const [isWhishList, setIsWhishList] = useState(false);
   const [showSnackBar, setShowSnackBar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-
-  useEffect(() => {
-    if (user.wishlist.includes(data._id)) {
-      setIsWhishList(true);
-    }
-  }, []);
 
   const handleRemoveWishList = async () => {
     const getCookie = Cookies.get("HappyT");
@@ -31,30 +24,16 @@ function EachProduct(props) {
       const wishlistData = { mobileNumber: user.number, id: data._id };
       const { status, responseData } = await removeFromWishList(wishlistData);
       if (status === 200) {
+        fetchWishListProducts();
         setSnackbarMessage(responseData.message);
         setShowSnackBar(true);
-        setIsWhishList(false);
-      }
-    }
-  };
-
-  const handleAddWishList = async () => {
-    const getCookie = Cookies.get("HappyT");
-    if (getCookie === undefined) {
-      navigate("/login");
-    } else {
-      const wishlistData = { mobileNumber: user.number, id: data._id };
-      const { status, responseData } = await addToWishList(wishlistData);
-      if (status === 200) {
-        setSnackbarMessage(responseData.message);
-        setShowSnackBar(true);
-        setIsWhishList(true);
       }
     }
   };
 
   const navigateToView = (e) => {
     const tag = e.target.tagName;
+
     if (tag !== "BUTTON" && tag !== "svg" && tag !== "path") {
       navigate(`/products/${data._id}`);
     }
@@ -67,26 +46,13 @@ function EachProduct(props) {
         alt="product"
         className="eachProductImage"
       />
-      <div className="eachProductBrandWhishListContainer">
-        <p className="eachProductDarkPara">{data.brand_details.name}</p>
-        {isWhishList ? (
-          <button
-            onClick={handleRemoveWishList}
-            className="eachProductWishListButton"
-          >
-            <ToggleWishListIcon color="#e53170" fill="#e53170" />
-          </button>
-        ) : (
-          <button
-            onClick={handleAddWishList}
-            className="eachProductWishListButton"
-          >
-            <ToggleWishListIcon color="#33272a" fill="none" />
-          </button>
-        )}
-      </div>
+      <p className="eachProductDarkPara">{data.brand_details.name}</p>
       <p className="eachProductLightPara">{data.name}</p>
       <p className="eachProductDarkPara">Rs. {data.price}</p>
+      <div className="eachWishListActionButtonsContainer">
+        <button onClick={handleRemoveWishList} className="eachWishListRemoveButton"><DeleteIcon/></button>
+        <button className="eachWishListAddToBagButton"> Add to Cart</button>
+      </div>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         open={showSnackBar}

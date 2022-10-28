@@ -205,6 +205,7 @@ function Login() {
                 <button
                   className="editNumberButton"
                   onClick={() => setFormState(false)}
+                  type="button"
                 >
                   Edit
                 </button>

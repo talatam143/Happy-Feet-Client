@@ -10,7 +10,7 @@ export const userStateSlice = createSlice({
     isLoggedIn: getNumber === undefined ? false : true,
     number: getNumber === undefined ? "" : getNumber,
     wishlist: [],
-    fetchedWishList:false
+    fetchedWishList: false,
   },
   reducers: {
     setUser: (state, payload) => {
@@ -22,8 +22,8 @@ export const userStateSlice = createSlice({
     removeUser: (state) => {
       state.isLoggedIn = false;
       state.number = "";
-      state.wishlist=[];
-      state.fetchedWishList=false;
+      state.wishlist = [];
+      state.fetchedWishList = false;
       Cookies.remove("HappyT");
       Cookies.remove("num");
     },

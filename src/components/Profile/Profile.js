@@ -39,8 +39,8 @@ function Profile() {
   };
 
   const handleLogout = () => {
-    dispatch(removeUser);
-    navigate("/");
+    dispatch(removeUser());
+    navigate("/")
   };
 
   return (

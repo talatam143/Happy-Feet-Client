@@ -73,7 +73,7 @@ function Profile() {
         </div>
       </div>
       <div className="accountSpecialButtonContainer">
-        <button className="accountSpecialButton">
+        <button className="accountSpecialButton" onClick={() => navigate("/wishlist")}>
           <WishlistIcon color="#ff8ba7" size="40" /> My Wishlist{" "}
         </button>
         <button className="accountSpecialButton">

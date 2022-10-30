@@ -65,3 +65,26 @@
     font-weight: 600;
     
 }
+
+.selectSizePara{
+    margin: 0;
+}
+
+.wishListSelectSizeDiv{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.eachSelectedWishListSizePara{
+    margin: 3px;
+    border:solid 2px #33272a;
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+.eachWishListSizePara{
+    margin: 3px;
+    border:solid 1px #594a4e;
+    padding: 4px 10px;
+    border-radius: 4px;
+}

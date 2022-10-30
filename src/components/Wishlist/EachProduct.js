@@ -1,20 +1,20 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { DeleteIcon } from "../SVG/svgrepo";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
 
+
+import { addToCart } from "../../api/CartApi";
 import { removeFromWishList } from "../../api/WishListApi";
 import "./EachWishList.css";
-import { useSelector } from "react-redux";
 
 function EachProduct(props) {
-  const { data,fetchWishListProducts } = props;
+  const { data, fetchWishListProducts,updateSnackBar } = props;
   const navigate = useNavigate();
   const user = useSelector((state) => state.userState);
-  const [showSnackBar, setShowSnackBar] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [selectSize, setSelectSize] = useState(false);
+  const [selectedSize, setSelectedSize] = useState(null);
 
   const handleRemoveWishList = async () => {
     const getCookie = Cookies.get("HappyT");
@@ -25,17 +25,40 @@ function EachProduct(props) {
       const { status, responseData } = await removeFromWishList(wishlistData);
       if (status === 200) {
         fetchWishListProducts();
-        setSnackbarMessage(responseData.message);
-        setShowSnackBar(true);
+        updateSnackBar(true, responseData.message);
       }
     }
   };
 
   const navigateToView = (e) => {
     const tag = e.target.tagName;
-
-    if (tag !== "BUTTON" && tag !== "svg" && tag !== "path") {
+    if (
+      tag !== "BUTTON" &&
+      tag !== "svg" &&
+      tag !== "path" &&
+      e.target.id !== "sizeParaId"
+    ) {
       navigate(`/products/${data._id}`);
+    }
+  };
+
+  const addToBag = async () => {
+    setSelectSize(true);
+    if (selectedSize !== null) {
+      const getNum = Cookies.get("num");
+        let productData = {
+          id: data._id,
+          quantity: 1,
+          size: selectedSize,
+          mobileNumber: getNum,
+        };
+        const { status, responseData } = await addToCart(productData);
+        if (status === 200) {
+          fetchWishListProducts();
+          updateSnackBar(true, responseData.message);
+        } else {
+          updateSnackBar(true, responseData.error);
+        }
     }
   };
 
@@ -46,35 +69,51 @@ function EachProduct(props) {
         alt="product"
         className="eachProductImage"
       />
-      <p className="eachProductDarkPara">{data.brand_details.name}</p>
-      <p className="eachProductLightPara">{data.name}</p>
-      <p className="eachProductDarkPara">Rs. {data.price}</p>
+      {selectSize ? (
+        <>
+          <p className="selectSizePara">Select Size</p>
+          <div className="wishListSelectSizeDiv">
+            {data.size_quantity.sort().map(
+              (eachSize) =>
+                eachSize.quantity > 0 && (
+                  <p
+                    id="sizeParaId"
+                    key={eachSize.size}
+                    className={
+                      eachSize.size === selectedSize
+                        ? "eachSelectedWishListSizePara"
+                        : "eachWishListSizePara"
+                    }
+                    onClick={() => {
+                      setSelectedSize(eachSize.size);
+                    }}
+                  >
+                    {eachSize.size}
+                  </p>
+                )
+            )}
+          </div>
+        </>
+      ) : (
+        <>
+          <p className="eachProductDarkPara">{data.brand_details.name}</p>
+          <p className="eachProductLightPara">{data.name}</p>
+          <p className="eachProductDarkPara">Rs. {data.price}</p>
+        </>
+      )}
       <div className="eachWishListActionButtonsContainer">
-        <button onClick={handleRemoveWishList} className="eachWishListRemoveButton"><DeleteIcon/></button>
-        <button className="eachWishListAddToBagButton"> Add to Cart</button>
-      </div>
-      <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        open={showSnackBar}
-        autoHideDuration={1000}
-        onClose={() => setShowSnackBar(false)}
-      >
-        <MuiAlert
-          elevation={6}
-          severity="success"
-          variant="outlined"
-          sx={{
-            backgroundColor: "#FFFFFF",
-            color: "#e53170",
-            fontWeight: "600",
-            fontSize: "16px",
-            borderRadius: "8px",
-            padding: "0 10px",
-          }}
+        <button
+          onClick={handleRemoveWishList}
+          className="eachWishListRemoveButton"
         >
-          {snackbarMessage}
-        </MuiAlert>
-      </Snackbar>
+          <DeleteIcon />
+        </button>
+        <button className="eachWishListAddToBagButton" onClick={addToBag}>
+          {" "}
+          Add to Cart
+        </button>
+      </div>
+      
     </div>
   );
 }

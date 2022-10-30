@@ -15,6 +15,7 @@ import "swiper/css/pagination";
 import "swiper/css/effect-creative";
 import "swiper/css/thumbs";
 import { ArrowLeft, ToggleWishListIcon } from "../SVG/svgrepo";
+import { addToCart } from "../../api/CartApi";
 
 function ViewProduct() {
   const params = useParams();
@@ -24,6 +25,10 @@ function ViewProduct() {
   const [fetchedProduct, setFetchProduct] = useState(false);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
+  const [sizeError, setSizeError] = useState(false);
+  const [cartError, setCartError] = useState(false);
+  const [cartErrorMessage, setCartErrorMessage] = useState(false);
+  const [addedToBag, setAddedToBag] = useState(false)
   const [isWhishList, setIsWhishList] = useState(false);
   const [showSnackBar, setShowSnackBar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -41,6 +46,32 @@ function ViewProduct() {
       setProduct(productData);
       setFetchProduct(true);
     }
+  };
+
+  const addToBag = async() => {
+    setCartError(false)
+    if(addedToBag){
+      navigate("/cart");
+    } else{
+    if (selectedSize === null) {
+      setSizeError(true);
+    } else{
+      const getNum = Cookies.get("num");
+      if (getNum === undefined) {
+        navigate("/login");
+      } else {
+        let data = {id :product._id , quantity:1, size: selectedSize, mobileNumber:getNum}
+        const{status, responseData} = await addToCart(data);
+        if(status === 200){
+          setAddedToBag(true);
+        } else{
+          setAddedToBag(true);
+          setCartError(true)
+          setCartErrorMessage(responseData.error)
+        }
+      }
+    }
+  }
   };
 
   const toggleWishList = async () => {
@@ -73,7 +104,10 @@ function ViewProduct() {
       {fetchedProduct ? (
         <div className="productViewContainer">
           <div className="productViewBackContainer">
-            <button className="productViewBackIcon" onClick={() => navigate(-1)}>
+            <button
+              className="productViewBackIcon"
+              onClick={() => navigate(-1)}
+            >
               <ArrowLeft />
             </button>
           </div>
@@ -149,16 +183,23 @@ function ViewProduct() {
                           ? "eachSelectedSizePara"
                           : "eachSizePara"
                       }
-                      onClick={() => setSelectedSize(eachSize.size)}
+                      onClick={() => {
+                        setSelectedSize(eachSize.size);
+                        setSizeError(false);
+                        setCartError(false)
+                      }}
                     >
                       {eachSize.size}
                     </p>
                   )
               )}
             </div>
+            {sizeError ? <p className="selectSizeErrorPara">Select Size</p> : null}
           </div>
           <div className="productViewButtonsContainer">
-            <button className="productViewAddToBagButton">Add to Bag</button>
+            <button className="productViewAddToBagButton" onClick={addToBag}>
+              {addedToBag ? "Go to Bag" : "Add to Bag"}
+            </button>
             <button
               className="productViewWishlistButton"
               onClick={toggleWishList}
@@ -170,6 +211,7 @@ function ViewProduct() {
               )}{" "}
             </button>
           </div>
+          {cartError ? <p className="selectSizeErrorPara">{cartErrorMessage}</p> : null}
         </div>
       ) : null}
       <Snackbar

@@ -34,11 +34,9 @@ function Login() {
   useEffect(() => {
     let isLoggedIn = Cookies.get("HappyT");
     if(isLoggedIn !== undefined){
-      navigate("/")
+      navigate(-1)
     }
   })
-
-  
 
   const handleOtpChange = (e) => {
     let { name, value, maxLength } = e.target;
@@ -101,7 +99,7 @@ function Login() {
       setIsLoading(true);
       let { status, responseData } = await verifyOtp(data);
       if (status === 200) {
-        navigate("/");
+        navigate(-1);
       } else if (status === 404){
         setIsLoading(false);
         setSnackBarState(false);

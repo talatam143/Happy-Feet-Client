@@ -145,3 +145,10 @@
   border-radius: 6px !important;
   padding: 0 !important;
 }
+
+.selectSizeErrorPara{
+    margin: 0;
+    font-weight: 600;
+    color: #F44336;
+    text-align: center;
+}

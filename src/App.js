@@ -19,7 +19,6 @@ function App() {
   const location = useLocation();
   const dispatch = useDispatch();
   const fetchFilters = useSelector((state) => state.filterState.haveFilters);
-  const user = useSelector((state) => state.userState);
 
   useEffect(() => {
     if (location.pathname === "/products") {
@@ -27,15 +26,12 @@ function App() {
         getCategoriesAndBrands();
       }
     }
-    if (user.isLoggedIn && !user.fetchedWishList) {
-      fetchWishList()
-    }
+    fetchWishList();
   }, [location]);
 
-  const fetchWishList = async() =>{
+  const fetchWishList = async () => {
     await getWishList();
-  }
-
+  };
 
   const getCategoriesAndBrands = async () => {
     const { status, data } = await getBrandsandCategories();

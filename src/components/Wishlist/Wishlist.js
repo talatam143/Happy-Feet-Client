@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 import { getWishListProducts } from "../../api/WishListApi";
 import EachProduct from "./EachProduct"
@@ -9,6 +11,8 @@ import heart from "../../images/heart.png";
 import "./Wishlist.css";
 
 function Wishlist() {
+  const [showSnackBar, setShowSnackBar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
   const [whishListItems, setWishListItems] = useState([]);
   const pageState = useSelector((state) => state.pageState)
   const navigate = useNavigate()
@@ -23,10 +27,11 @@ function Wishlist() {
     }
   }, []);
 
-  useEffect(() =>{
-    fetchWishListProducts()
-  },[])
-
+  const updateSnackBar = (state,message) =>{
+    setShowSnackBar(state)
+    setSnackbarMessage(message)
+  }
+    
   const fetchWishListProducts = async() =>{
     const {status, responseData} = await getWishListProducts();
     if(status === 200) {
@@ -48,7 +53,7 @@ function Wishlist() {
       {whishListItems.length > 0 ? (
         <div className="wishListProductsContainer">
             {whishListItems.map((eachProduct) => (
-              <EachProduct key={eachProduct._id} data={eachProduct} fetchWishListProducts={fetchWishListProducts} />
+              <EachProduct key={eachProduct._id} data={eachProduct} fetchWishListProducts={fetchWishListProducts} updateSnackBar={updateSnackBar} />
             ))}
           </div>
       ) : (
@@ -65,6 +70,28 @@ function Wishlist() {
       :
       null
       }
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        open={showSnackBar}
+        autoHideDuration={1000}
+        onClose={() => setShowSnackBar(false)}
+      >
+        <MuiAlert
+          elevation={6}
+          severity="success"
+          variant="outlined"
+          sx={{
+            backgroundColor: "#FFFFFF",
+            color: "#e53170",
+            fontWeight: "600",
+            fontSize: "16px",
+            borderRadius: "8px",
+            padding: "0 10px",
+          }}
+        >
+          {snackbarMessage}
+        </MuiAlert>
+      </Snackbar>
     </div>
   );
 }

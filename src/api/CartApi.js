@@ -9,13 +9,10 @@ import {
 
 const server = process.env.REACT_APP_SERVER_URL;
 
-let count = { getCart: 0 };
+
 
 export const getCartItems = async () => {
-  if (count.getCart === 0) {
-    store.dispatch(loadingState());
-    count.getCart += 1;
-  }
+  store.dispatch(loadingState());
   let token = Cookies.get("HappyT");
   let number = Cookies.get("num");
   const url = `${server}cart/${number}`;
@@ -49,7 +46,7 @@ export const addToCart = async (data) => {
   };
   const response = await fetch(url, options);
   const responseData = await response.json();
-  if (response.status === 200) {
+  if (response.status === 200 || response.status === 404 ) {
     store.dispatch(successState());
   } else {
     store.dispatch(failedState());

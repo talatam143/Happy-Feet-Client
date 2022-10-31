@@ -12,6 +12,7 @@ import { getProducts } from "../../api/Products";
 import { ArrowLeft, FilterIcon, SortIcon } from "../SVG/svgrepo";
 import EachProduct from "./EachProduct";
 import "./Products.css";
+import ProductSkeleton from "../Addons/ProductSkeleton";
 
 const initialFilterList = {
   category: "",
@@ -26,6 +27,7 @@ const categories = ["Gender", "Category", "Brand", "Color"];
 function Products() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const pageState = useSelector((state) => state.pageState);
   const fetchFilters = useSelector((state) => state.filterState);
   const [filters, setFilters] = useState(initialFilterList);
   const [products, setProducts] = useState([]);
@@ -184,7 +186,7 @@ function Products() {
     setFilters({ ...filters, gender: "" });
   };
 
-  const resetSort = () =>{
+  const resetSort = () => {
     setFilters({ ...filters, price: "" });
     let formattedBrands = filters.brand.replace(/&/g, "@");
     navigate({
@@ -197,215 +199,235 @@ function Products() {
         price: "",
       }).toString(),
     });
-    setShowSort(false)
-  }
+    setShowSort(false);
+  };
 
   return (
     <div>
-      {products.length > 0 ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="productsContainer" onClick={() => setShowSort(false)}>
-            {products.map((eachProduct) => (
-              <EachProduct key={eachProduct._id} data={eachProduct} />
-            ))}
-          </div>
-        </motion.div>
+      {pageState.loading ? (
+        <ProductSkeleton />
       ) : (
-        <></>
-      )}
-      <button
-        className="productsFilterButton"
-        onClick={() => {
-          setShowFilter(true);
-          setSelectedCategory(categories[0]);
-        }}
-      >
-        <FilterIcon color="#33272a" />
-      </button>
-      <button className="productsSortButton" onClick={() => setShowSort(true)}>
-        <SortIcon color="#33272a" />
-      </button>
-      {showFilter && (
-        <motion.div
-          initial={{ opacity: 0, y: 1000 }}
-          animate={{ opacity: 1, position: "fixed", top: 0, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="productsFilterContainer">
-            <div className="productsFilterHeader">
-              <button
-                onClick={() => setShowFilter(false)}
-                className="productsFilterBackButton"
+        <>
+          {products.length > 0 ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div
+                className="productsContainer"
+                onClick={() => setShowSort(false)}
               >
-                <ArrowLeft />
-              </button>
-              <p className="productsFilterHeaderPara">Filters</p>
-            </div>
-            <div className="productsFiltersBodyContainer">
-              <div className="productsFiltersHeadingsContainer">
-                {categories.map((eachCategory) => (
-                  <p
-                    className={
-                      selectedCategory === eachCategory
-                        ? "selectedProductsFiltersHeading"
-                        : "productsFiltersHeading"
-                    }
-                    key={eachCategory}
-                    onClick={() => {
-                      setSelectedCategory(eachCategory);
-                    }}
-                  >
-                    {eachCategory}
-                  </p>
+                {products.map((eachProduct) => (
+                  <EachProduct key={eachProduct._id} data={eachProduct} />
                 ))}
               </div>
-              <div className="productsFiltersCheckBoxesContainer">
-                {selectedCategory === "Gender" && (
-                  <div className="genderradioButton">
-                    <div className="productFiltersEachRadioDiv">
-                      <input
-                        type="radio"
-                        name="gender"
-                        value="Male"
-                        id="maleId"
-                        onChange={handleFilterChange}
-                        checked={"Male" === filters.gender}
-                      />
-                      <label htmlFor="maleId">Male</label>
-                    </div>
-                    <div className="productFiltersEachRadioDiv">
-                      <input
-                        type="radio"
-                        name="gender"
-                        value="Female"
-                        id="femaleId"
-                        onChange={handleFilterChange}
-                        checked={"Female" === filters.gender}
-                      />
-                      <label htmlFor="femaleId">Female</label>
-                    </div>
-                    <button
-                      className="productsFilterGenderResetButton"
-                      id="gender"
-                      onClick={resetGender}
-                    >
+            </motion.div>
+          ) : (
+            <></>
+          )}
+          <button
+            className="productsFilterButton"
+            onClick={() => {
+              setShowFilter(true);
+              setSelectedCategory(categories[0]);
+            }}
+          >
+            <FilterIcon color="#33272a" />
+          </button>
+          <button
+            className="productsSortButton"
+            onClick={() => setShowSort(true)}
+          >
+            <SortIcon color="#33272a" />
+          </button>
+          {showFilter && (
+            <motion.div
+              initial={{ opacity: 0, y: 1000 }}
+              animate={{ opacity: 1, position: "fixed", top: 0, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="productsFilterContainer">
+                <div className="productsFilterHeader">
+                  <button
+                    onClick={() => setShowFilter(false)}
+                    className="productsFilterBackButton"
+                  >
+                    <ArrowLeft />
+                  </button>
+                  <p className="productsFilterHeaderPara">Filters</p>
+                </div>
+                <div className="productsFiltersBodyContainer">
+                  <div className="productsFiltersHeadingsContainer">
+                    {categories.map((eachCategory) => (
+                      <p
+                        className={
+                          selectedCategory === eachCategory
+                            ? "selectedProductsFiltersHeading"
+                            : "productsFiltersHeading"
+                        }
+                        key={eachCategory}
+                        onClick={() => {
+                          setSelectedCategory(eachCategory);
+                        }}
+                      >
+                        {eachCategory}
+                      </p>
+                    ))}
+                  </div>
+                  <div className="productsFiltersCheckBoxesContainer">
+                    {selectedCategory === "Gender" && (
+                      <div className="genderradioButton">
+                        <div className="productFiltersEachRadioDiv">
+                          <input
+                            type="radio"
+                            name="gender"
+                            value="Male"
+                            id="maleId"
+                            onChange={handleFilterChange}
+                            checked={"Male" === filters.gender}
+                          />
+                          <label htmlFor="maleId">Male</label>
+                        </div>
+                        <div className="productFiltersEachRadioDiv">
+                          <input
+                            type="radio"
+                            name="gender"
+                            value="Female"
+                            id="femaleId"
+                            onChange={handleFilterChange}
+                            checked={"Female" === filters.gender}
+                          />
+                          <label htmlFor="femaleId">Female</label>
+                        </div>
+                        <button
+                          className="productsFilterGenderResetButton"
+                          id="gender"
+                          onClick={resetGender}
+                        >
+                          Reset
+                        </button>
+                      </div>
+                    )}
+                    {selectedCategory === "Category" &&
+                      fetchFilters.categories.map((eachCategory) => (
+                        <div
+                          key={eachCategory}
+                          className="productFiltersEachRadioDiv"
+                        >
+                          <input
+                            type="checkbox"
+                            value={eachCategory}
+                            name="category"
+                            onChange={handleFilterChange}
+                            id={eachCategory}
+                            checked={getPreviousCategories(eachCategory)}
+                            className="productsFilterColorsCheckBox"
+                          />
+                          <label htmlFor={eachCategory}>{eachCategory}</label>
+                        </div>
+                      ))}
+                    {selectedCategory === "Brand" &&
+                      fetchFilters.brands.map((eachBrand) => (
+                        <div
+                          key={eachBrand}
+                          className="productFiltersEachRadioDiv"
+                        >
+                          <input
+                            type="checkbox"
+                            value={eachBrand}
+                            name="brand"
+                            onChange={handleFilterChange}
+                            id={eachBrand}
+                            checked={getPreviousBrands(eachBrand)}
+                            className="productsFilterColorsCheckBox"
+                          />
+                          <label htmlFor={eachBrand}>{eachBrand}</label>
+                        </div>
+                      ))}
+                    {selectedCategory === "Color" &&
+                      fetchFilters.colors.map((eachColor) => (
+                        <div
+                          key={eachColor}
+                          className="productFiltersEachRadioDiv"
+                        >
+                          <input
+                            type="checkbox"
+                            value={eachColor}
+                            name="color"
+                            onChange={handleFilterChange}
+                            id={eachColor}
+                            className="productsFilterColorsCheckBox"
+                            checked={getPreviousColor(eachColor)}
+                          />
+                          <p
+                            htmlFor={eachColor}
+                            style={{ backgroundColor: eachColor }}
+                            className="productColorFilterLabel"
+                          ></p>
+                          <label htmlFor={eachColor}>{eachColor}</label>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+                <div className="productsFilterFooterContainer">
+                  <button
+                    className="productsFilterResetButton"
+                    onClick={resetFilters}
+                  >
+                    Reset
+                  </button>
+                  <button
+                    onClick={applyFilters}
+                    className="productsFilterApplyButton"
+                  >
+                    Apply Filters
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+          {showSort && (
+            <motion.div
+              initial={{ opacity: 0, y: 1000 }}
+              animate={{ opacity: 1, position: "fixed", top: 0, y: "75%" }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="productsFilterContainer">
+                <p className="filtersProductSortHeading">Sort By</p>
+                <div className="genderradioButton">
+                  <div className="productFiltersEachRadioDiv">
+                    <input
+                      type="radio"
+                      name="price"
+                      value="HIGH"
+                      id="highId"
+                      onChange={handleSortChange}
+                      checked={"HIGH" === filters.price}
+                    />
+                    <label htmlFor="highId">Price (highest first)</label>
+                  </div>
+                  <div className="productFiltersEachRadioDiv">
+                    <input
+                      type="radio"
+                      name="price"
+                      value="LOW"
+                      id="lowId"
+                      onChange={handleSortChange}
+                      checked={"LOW" === filters.price}
+                    />
+                    <label htmlFor="lowId">Price (lowest first)</label>
+                  </div>
+                  <div className="sortResetButtonContainer">
+                    <button className="sortResetButton" onClick={resetSort}>
                       Reset
                     </button>
                   </div>
-                )}
-                {selectedCategory === "Category" &&
-                  fetchFilters.categories.map((eachCategory) => (
-                    <div
-                      key={eachCategory}
-                      className="productFiltersEachRadioDiv"
-                    >
-                      <input
-                        type="checkbox"
-                        value={eachCategory}
-                        name="category"
-                        onChange={handleFilterChange}
-                        id={eachCategory}
-                        checked={getPreviousCategories(eachCategory)}
-                        className="productsFilterColorsCheckBox"
-                      />
-                      <label htmlFor={eachCategory}>{eachCategory}</label>
-                    </div>
-                  ))}
-                {selectedCategory === "Brand" &&
-                  fetchFilters.brands.map((eachBrand) => (
-                    <div key={eachBrand} className="productFiltersEachRadioDiv">
-                      <input
-                        type="checkbox"
-                        value={eachBrand}
-                        name="brand"
-                        onChange={handleFilterChange}
-                        id={eachBrand}
-                        checked={getPreviousBrands(eachBrand)}
-                        className="productsFilterColorsCheckBox"
-                      />
-                      <label htmlFor={eachBrand}>{eachBrand}</label>
-                    </div>
-                  ))}
-                {selectedCategory === "Color" &&
-                  fetchFilters.colors.map((eachColor) => (
-                    <div key={eachColor} className="productFiltersEachRadioDiv">
-                      <input
-                        type="checkbox"
-                        value={eachColor}
-                        name="color"
-                        onChange={handleFilterChange}
-                        id={eachColor}
-                        className="productsFilterColorsCheckBox"
-                        checked={getPreviousColor(eachColor)}
-                      />
-                      <p
-                        htmlFor={eachColor}
-                        style={{ backgroundColor: eachColor }}
-                        className="productColorFilterLabel"
-                      ></p>
-                      <label htmlFor={eachColor}>{eachColor}</label>
-                    </div>
-                  ))}
+                </div>
               </div>
-            </div>
-            <div className="productsFilterFooterContainer">
-              <button
-                className="productsFilterResetButton"
-                onClick={resetFilters}
-              >
-                Reset
-              </button>
-              <button
-                onClick={applyFilters}
-                className="productsFilterApplyButton"
-              >
-                Apply Filters
-              </button>
-            </div>
-          </div>
-        </motion.div>
-      )}
-      {showSort && (
-        <motion.div
-          initial={{ opacity: 0, y: 1000 }}
-          animate={{ opacity: 1, position: "fixed", top: 0, y: "75%" }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="productsFilterContainer">
-            <p className="filtersProductSortHeading">Sort By</p>
-            <div className="genderradioButton">
-              <div className="productFiltersEachRadioDiv">
-                <input
-                  type="radio"
-                  name="price"
-                  value="HIGH"
-                  id="highId"
-                  onChange={handleSortChange}
-                  checked={"HIGH" === filters.price}
-                />
-                <label htmlFor="highId">Price (highest first)</label>
-              </div>
-              <div className="productFiltersEachRadioDiv">
-                <input
-                  type="radio"
-                  name="price"
-                  value="LOW"
-                  id="lowId"
-                  onChange={handleSortChange}
-                  checked={"LOW" === filters.price}
-                />
-                <label htmlFor="lowId">Price (lowest first)</label>
-              </div>
-              <div className="sortResetButtonContainer">
-                <button className="sortResetButton" onClick={resetSort}>Reset</button>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+            </motion.div>
+          )}
+        </>
       )}
     </div>
   );

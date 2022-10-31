@@ -7,6 +7,7 @@ import { Box } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { setFilters } from "../../stateslices/filtersSlice";
 
+import WelcomeSkeleton from "../Addons/WelcomeSkeleton";
 import logo from "../../images/clientLogo.svg";
 import Category from "./Category";
 import { getBrandsandCategories } from "../../api/welcomePage";
@@ -26,7 +27,7 @@ function Welcomepage() {
 
   useEffect(() => {
     getCategoriesandBrands();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getCategoriesandBrands = async () => {
@@ -37,13 +38,13 @@ function Welcomepage() {
       setColorsList(data.colorsList);
       let categoriesNames = [];
       let brandNames = [];
-      let colorsNames = []
+      let colorsNames = [];
       data.categoriesList.map((eachCategory) =>
         categoriesNames.push(eachCategory.name)
       );
       data.brandsList.map((eachBrand) => brandNames.push(eachBrand.name));
       data.colorsList.map((eachColor) => colorsNames.push(eachColor));
-      dispatch(setFilters({categoriesNames,brandNames,colorsNames}))
+      dispatch(setFilters({ categoriesNames, brandNames, colorsNames }));
     }
   };
 
@@ -60,6 +61,7 @@ function Welcomepage() {
           />
         </div>
       </div>
+      {pageState.loading && (<WelcomeSkeleton/>)}
       {pageState.success && (
         <>
           <motion.div

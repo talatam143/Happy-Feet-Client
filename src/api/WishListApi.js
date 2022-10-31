@@ -9,6 +9,7 @@ import {
 } from "../stateslices/pageStateSlice";
 
 const server = process.env.REACT_APP_SERVER_URL;
+let count = { getWishlist: 0 };
 
 export const addToWishList = async (data) => {
   let token = Cookies.get("HappyT");
@@ -67,7 +68,10 @@ export const getWishList = async () => {
 };
 
 export const getWishListProducts = async() =>{
-  store.dispatch(loadingState());
+  if (count.getCart === 0) {
+    store.dispatch(loadingState());
+    count.getWishlist += 1;
+  }
   let token = Cookies.get("HappyT");
   let number = Cookies.get("num");
   const url = `${server}wishlist/products/${number}`;
@@ -79,7 +83,7 @@ export const getWishListProducts = async() =>{
     },
   };
   const response = await fetch(url, options);
-  if(response.status === 200){
+  if(response.status === 200 || response.status === 404){
     store.dispatch(successState());
     const responseData = await response.json();
     return { responseData, status: response.status };

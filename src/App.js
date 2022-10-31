@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setFilters } from "./stateslices/filtersSlice";
+import Cookies from "js-cookie";
 
 import Home from "./components/Home/Home";
 import Welcomepage from "./components/Welcomepage/Welcomepage";
@@ -14,6 +15,7 @@ import { getBrandsandCategories } from "./api/welcomePage";
 import { getWishList } from "./api/WishListApi";
 import Login from "./components/Login/Login";
 import ViewProduct from "./components/Products/ViewProduct";
+import UpdateUser from "./components/Login/UpdateUser";
 
 function App() {
   const location = useLocation();
@@ -26,7 +28,10 @@ function App() {
         getCategoriesAndBrands();
       }
     }
-    fetchWishList();
+    let getNumber = Cookies.get("num");
+    if (getNumber !== undefined) {
+      fetchWishList();
+    }
   }, [location]);
 
   const fetchWishList = async () => {
@@ -58,6 +63,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ViewProduct />} />
       </Route>
+      <Route path="/updateuser" element={<UpdateUser />} />
       <Route path="/login" element={<Login />} />
     </Routes>
   );

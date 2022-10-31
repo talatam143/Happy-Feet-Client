@@ -99,7 +99,11 @@ function Login() {
       setIsLoading(true);
       let { status, responseData } = await verifyOtp(data);
       if (status === 200) {
-        navigate(-1);
+        if(responseData.userStatus === false){
+          navigate("/updateuser");
+        } else{
+          navigate(-1);
+        }
       } else if (status === 404){
         setIsLoading(false);
         setSnackBarState(false);

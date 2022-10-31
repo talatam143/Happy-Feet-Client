@@ -1,0 +1,233 @@
+.updateUserContainer {
+  background-color: #ff8ba7;
+  background-image: linear-gradient(160deg, #ff8ba7 0%, #ffc6c7 100%);
+  color: #33272a;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.updateUserWelcomeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.updateUserContainerBrandLogo {
+  margin-top: 20px;
+  width: 90px;
+}
+.updateUserHeading {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #33272a;
+}
+
+.updateUserBrandSub {
+  font-family: "Dancing Script", cursive;
+  font-size: 20px;
+  font-weight: 900;
+  margin-top: 5px;
+}
+
+.updateUserFormContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form__group {
+  position: relative;
+  padding: 20px 0 0;
+  margin-top: 20px;
+  width: 90%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #e53170;
+  outline: 0;
+  font-size: 17px;
+  color: #33272a;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.form__field::placeholder {
+  color: transparent;
+}
+
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 17px;
+  cursor: text;
+  top: 20px;
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 17px;
+  color: #e53170;
+  pointer-events: none;
+}
+
+.form__field:focus {
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, #e53170, #ff8ba7);
+  border-image-slice: 1;
+}
+
+.form__field:focus ~ .form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 17px;
+  color: #e53170;
+  font-weight: 700;
+}
+
+/* reset input */
+.form__field:required,
+.form__field:invalid {
+  box-shadow: none;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  height: 34px;
+  margin-left: 20px;
+  align-self: flex-start;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  background-color: #3c3c3c;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 34px;
+  width: 140px;
+}
+
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(125px);
+}
+
+/*------ ADDED CSS ---------*/
+.slider:after {
+  content: "MALE";
+  color: #e53170;
+  display: block;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Verdana, sans-serif;
+}
+
+input:checked + .slider:after {
+  content: "FEMALE";
+}
+
+/*--------- END --------*/
+
+.dobInput{
+    align-self: flex-start;
+    margin-left: 20px;
+    width: 190px;
+    height: 45px;
+    font-weight: 500;
+    font-size: 24px;
+    color: #33272a;
+    border: solid 3px #e53170;
+    border-radius: 6px;
+    background-color: transparent;
+}
+
+.dobLabel{
+    align-self: flex-start;
+    margin: 0;
+    margin: 25px 0 3px 22px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #e53170;
+}
+
+.updateProfileButtonsContainer{
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.updateProfileSkipButton{
+    background-color: transparent;
+    border:solid #33272a;
+    border-radius:15px;
+    margin-right: 13px;
+    font-size: 22px;
+    font-weight: 600;
+    height:55px;
+    width: 100px;
+}
+.updateProfileUpdateButton{
+    background-color: transparent;
+    border:solid #e53170;
+    border-width: 3px 3px 9px 3px;
+    border-radius:15px;
+    margin-left: 13px;
+    font-size: 26px;
+    font-weight: 600;
+    height:60px;
+    width: 200px;
+}
+
+.updateUserFormErrorPara{
+    margin: 10px 0 0 0 ;
+    font-weight: 500;
+    color: #F44336;
+    text-align: center;
+    font-size: 20px;
+}

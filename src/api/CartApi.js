@@ -9,8 +9,13 @@ import {
 
 const server = process.env.REACT_APP_SERVER_URL;
 
+let count = { getCart: 0 };
+
 export const getCartItems = async () => {
-  store.dispatch(loadingState());
+  if (count.getCart === 0) {
+    store.dispatch(loadingState());
+    count.getCart += 1;
+  }
   let token = Cookies.get("HappyT");
   let number = Cookies.get("num");
   const url = `${server}cart/${number}`;
@@ -32,7 +37,6 @@ export const getCartItems = async () => {
 };
 
 export const addToCart = async (data) => {
-  store.dispatch(loadingState());
   let token = Cookies.get("HappyT");
   const url = `${server}cart/add`;
   const options = {
@@ -54,7 +58,6 @@ export const addToCart = async (data) => {
 };
 
 export const removeFromCart = async (data) => {
-  store.dispatch(loadingState());
   let token = Cookies.get("HappyT");
   const url = `${server}cart/remove`;
   const options = {
@@ -76,7 +79,6 @@ export const removeFromCart = async (data) => {
 };
 
 export const updateQuantity = async (data) => {
-  store.dispatch(loadingState());
   let token = Cookies.get("HappyT");
   const url = `${server}cart/update`;
   const options = {

@@ -46,6 +46,7 @@ function EachCartItem(props) {
     };
     const { status, responseData } = await updateQuantity(itemData);
     if (status === 200) {
+      setQuantityModel(false)
       fetchCart();
       updateSnackBar(true, responseData.message);
     }
@@ -74,7 +75,7 @@ function EachCartItem(props) {
           <p className="eachCartItemSizePara">Size : {data.size}</p>
           <button
             className="eachCartItemQuantityButton"
-            onClick={() => setQuantityModel(true)}
+            onClick={() => {setSelectQuantity(data.quantity);setQuantityModel(true)}}
           >
             <p className="eachCartItemQuantityPara">Qty : {data.quantity}</p>
           </button>

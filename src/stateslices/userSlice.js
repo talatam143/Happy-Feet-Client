@@ -26,6 +26,7 @@ export const userStateSlice = createSlice({
       state.fetchedWishList = false;
       Cookies.remove("HappyT");
       Cookies.remove("num");
+      window.location.reload();
     },
     setWishList: (state, payload) => {
       state.fetchedWishList = true;

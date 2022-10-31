@@ -36,6 +36,8 @@ function Wishlist() {
     const {status, responseData} = await getWishListProducts();
     if(status === 200) {
       setWishListItems(responseData.getWishListProducts)
+    } else if(status === 404){
+      setWishListItems([])
     }
   }
 

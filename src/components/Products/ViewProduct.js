@@ -99,6 +99,7 @@ function ViewProduct() {
     }
   };
 
+
   return (
     <>
       {fetchedProduct ? (
@@ -173,7 +174,7 @@ function ViewProduct() {
           <div className="productViewSelectSizeContainer">
             <p className="productViewSelectSizePara">Select Size</p>
             <div className="eachSizeContainer">
-              {product.size_quantity.sort().map(
+              {product.size_quantity.sort((a,b) => Number(a.size) < Number(b.size) ? -1 : 1).map(
                 (eachSize) =>
                   eachSize.quantity > 0 && (
                     <p

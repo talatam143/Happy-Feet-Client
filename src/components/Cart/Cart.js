@@ -30,16 +30,29 @@ function Cart() {
   const fetchCart = async () => {
     const { status, responseData } = await getCartItems();
     if (status === 200) {
+      responseData.cartDetails.sort((a, b) => {
+        const id1 = a.id;
+        const id2 = b.id;
+        if (id1 < id2) {
+          return -1;
+        }
+        if (id1 > id2) {
+          return 1;
+        }
+
+        // names must be equal
+        return 0;
+      });
       setCartItems(responseData.cartDetails);
     } else if (status === 202) {
       setCartItems([]);
     }
   };
 
-  const updateSnackBar = (state,message) =>{
-    setShowSnackBar(state)
-    setSnackbarMessage(message)
-  }
+  const updateSnackBar = (state, message) => {
+    setShowSnackBar(state);
+    setSnackbarMessage(message);
+  };
 
   return (
     <div>
@@ -61,7 +74,7 @@ function Cart() {
           </div>
           {cartItems.length > 0 ? (
             <div className="cartItemsContainer">
-              {cartItems.map((eachItem) => (
+              {cartItems.sort().map((eachItem) => (
                 <EachCartItem
                   key={eachItem.id + eachItem.size}
                   data={eachItem}
@@ -98,11 +111,7 @@ function Cart() {
         autoHideDuration={1000}
         onClose={() => setShowSnackBar(false)}
       >
-        <MuiAlert
-          elevation={6}
-          severity="success"
-          variant="filled"
-        >
+        <MuiAlert elevation={6} severity="success" variant="filled">
           {snackbarMessage}
         </MuiAlert>
       </Snackbar>

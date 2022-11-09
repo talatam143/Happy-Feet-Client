@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import CircularProgress from "@mui/material/CircularProgress";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import { BiBookmarkHeart } from "react-icons/bi";
+import { BsTag } from "react-icons/bs";
 
-import { getAddress } from "../../api/CustomerAddressApi";
+import { addCartItems, setCartPrice } from "../../stateslices/cartStateSlice";
 import { getCartItems } from "../../api/CartApi";
-import Items from "./Items";
 import "./Cart.css";
-import { ArrowLeft } from "../SVG/svgrepo";
 import CartSkeleton from "../Addons/CartSkeleton";
-import Address from "./Address";
+import EachCartItem from "./EachCartItem";
+import cartBag from "../../images/cartbag.png";
+import { RightIcon } from "../SVG/svgrepo";
 
 function Cart() {
-  const [cartItems, setCartItems] = useState([]);
-  const [addressList, setAddressList] = useState([]);
-  const [cartStatus, setCartStatus] = useState("ITEMS");
-  const [cartHeaderHeading, setCartHeaderHeading] = useState("Shopping Bag");
-  const [cartButtonText, setCartButtonText] = useState("SELECT ADDRESS");
-  const [price, setPrice] = useState(0);
-  const [Convenience, setConvenience] = useState(200);
-  const [apiStatus, setApiStatus] = useState("INITIAL");
+  const [showSnackBar, setShowSnackBar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
   const pageState = useSelector((state) => state.pageState);
+  const cartState = useSelector((state) => state.cartState);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let isLoggedIn = Cookies.get("HappyT");
@@ -33,118 +32,161 @@ function Cart() {
     }
   }, []);
 
+  const goToAddress = () => {
+    navigate("/cart/address");
+  };
+
   const fetchCart = async () => {
     const { status, responseData } = await getCartItems();
     if (status === 200) {
-      responseData.cartDetails.sort((a, b) => {
-        const id1 = a.id;
-        const id2 = b.id;
-        if (id1 < id2) {
-          return -1;
-        }
-        if (id1 > id2) {
-          return 1;
-        }
-        return 0;
-      });
-      setCartItems(responseData.cartDetails);
-
       let tempPrice = 0;
+      var convenienceFee = 200;
       for (let eachItem of responseData.cartDetails) {
         tempPrice += eachItem.price * eachItem.quantity;
       }
       if (tempPrice > 1000) {
-        setConvenience(0);
-      } else {
-        setConvenience(200);
+        convenienceFee = 0;
       }
-      setPrice(tempPrice);
+      dispatch(addCartItems({ status: true, data: responseData.cartDetails }));
+      dispatch(
+        setCartPrice({
+          status: true,
+          data: { Discount : 0, price: tempPrice, convenienceFee },
+        })
+      );
     } else if (status === 202) {
-      setCartItems([]);
-    }
-  };
-
-  const changeCartState = async () => {
-    if (cartStatus === "ITEMS") {
-      setApiStatus("LOADING");
-      const { status, data } = await getAddress();
-      if (status === 200) {
-        setApiStatus("SUCCESS");
-        setAddressList(data);
-        setCartStatus("ADDRESS");
-        setCartHeaderHeading("Address");
-        setCartButtonText("CHECKOUT");
+      if (!cartState.isCartInitialized) {
+        dispatch(addCartItems({ status: false, data: [] }));
       }
     }
   };
 
-  const CartStatus = () => {
-    switch (cartStatus) {
-      case "ITEMS":
-        return (
-          <Items
-            price={price}
-            Convenience={Convenience}
-            cartItems={cartItems}
-            fetchCart={fetchCart}
-          />
-        );
-      case "ADDRESS":
-        return <Address addressList={addressList} cartItems={cartItems}/>;
-      default:
-        return null;
-    }
-  };
-
-  const cartGoBackButton = () => {
-    if (cartStatus === "ADDRESS") {
-      setCartStatus("ITEMS");
-      setCartHeaderHeading("Shopping Bag");
-      setCartButtonText("SELECT ADDRESS");
-    }
+  const updateSnackBar = (state, message) => {
+    setShowSnackBar(state);
+    setSnackbarMessage(message);
   };
 
   return (
     <div>
+      <div className="cartHeadingContainer">
+        <div className="cartCountContainer">
+          <p className="wishListHeadingPara">Shopping Bag</p>
+          {cartState.cartItems.length > 0 ? (
+            <p className="wishListCountPara">
+              {cartState.cartItems.length} Items
+            </p>
+          ) : null}
+        </div>
+      </div>
       {pageState.loading && <CartSkeleton />}
       {pageState.success ? (
         <>
-          <div className="cartHeadingContainer">
-            {(cartStatus === "ADDRESS" || cartStatus === "CHECKOUT") && (
-              <button
-                className="cartArrowBackButton"
-                onClick={cartGoBackButton}
-              >
-                <ArrowLeft />
-              </button>
+          <div>
+            {cartState.cartItems.length > 0 ? (
+              <>
+                <div className="cartItemsContainer">
+                  {cartState.cartItems.map((eachItem) => (
+                    <EachCartItem
+                      key={eachItem.id + eachItem.size}
+                      data={eachItem}
+                      fetchCart={fetchCart}
+                      updateSnackBar={updateSnackBar}
+                    />
+                  ))}
+                </div>
+                <Link
+                  to="/wishlist"
+                  style={{ textDecoration: "none" }}
+                  className="cartWishListParaLink"
+                >
+                  <p className="cartWishListPara">
+                    <BiBookmarkHeart className="cartWishListIcon" /> Add More
+                    From WishList
+                  </p>
+                  <RightIcon className="cartWishListRightIcon" />
+                </Link>
+                <p className="cartCouponsHeadingPara">COUPONS</p>
+                <div className="cartCouponsContainer">
+                  <p className="cartWishListPara">
+                    <BsTag className="cartWishListIcon" />
+                    Apply Coupon
+                  </p>
+                  <RightIcon className="cartWishListRightIcon" />
+                </div>
+                <div className="cartPiceContainer">
+                  <p className="cartPriceHeadingParas">
+                    PRICE DETAILS ({cartState.cartItems.length})
+                  </p>
+                  <hr className="cartPriceHR" />
+                  <div className="cartPriceMiniParasContainer">
+                    <p className="cartPriceMiniParas">Total MRP</p>
+                    <p className="cartPriceMiniParas">&#x20B9; {cartState.cartPriceData.price}</p>
+                  </div>
+                  <div className="cartPriceMiniParasContainer">
+                    <p className="cartPriceMiniParas">Discount on MRP</p>
+                    <p className="cartPriceMiniParas">-&#x20B9; {cartState.cartPriceData.Discount}</p>
+                  </div>
+                  <div className="cartPriceMiniParasContainer">
+                    <p className="cartPriceMiniParas">Coupon Discount</p>
+                    <p className="cartPriceMiniParas">Apply Coupon</p>
+                  </div>
+                  <div className="cartPriceMiniParasContainer">
+                    <p className="cartPriceMiniParas">Convenience Fee </p>
+                    {cartState.cartPriceData.price > 1000 ? (
+                      <p className="feeSpansPara">
+                        <span className="strikeFeeSpan">&#x20B9; 200</span>{" "}
+                        <span className="greenFreeSpan">FREE</span>{" "}
+                      </p>
+                    ) : (
+                      <p className="cartPriceMiniParas">{cartState.cartPriceData.Convenience}</p>
+                    )}
+                  </div>
+                  <hr className="cartPriceHR" />
+                  <div className="cartPriceMiniParasContainer">
+                    <p className="cartTotalAmountPara">Total Amount</p>
+                    <p className="cartTotalAmountPara">
+                      &#x20B9; {cartState.cartPriceData.price + cartState.cartPriceData.convenienceFee - cartState.cartPriceData.Discount}
+                    </p>
+                  </div>
+                </div>
+                <button className="cartPlaceOrderButton" onClick={goToAddress}>
+                  SELECT ADDRESS
+                </button>
+              </>
+            ) : (
+              <div className="wishListNoItemsContainer">
+                <div className="wishListNoItemsDataContainer">
+                  <img src={cartBag} alt="wishlist icon" width="300px" />
+                  <p className="wishListNoItemsDataContainerPara">
+                    Hey, it feels so light!
+                  </p>
+                  <p className="wishListNoItemsDataContainerMiniPara">
+                    There is nothing in your bag. Let's add some items.
+                  </p>
+                </div>
+                <button
+                  className="wishListContinueButton"
+                  onClick={() => navigate("/wishlist")}
+                >
+                  {" "}
+                  Add Items From Wishlist
+                </button>
+              </div>
             )}
-            <div className="cartCountContainer">
-              <p className="wishListHeadingPara">{cartHeaderHeading}</p>
-              {cartItems.length > 0 ? (
-                <p className="wishListCountPara">{cartItems.length} Items</p>
-              ) : null}
-            </div>
-          </div>
-          <CartStatus />
-          {cartItems.length > 0 && (
-            <button
-              className="cartPlaceOrderButton"
-              onClick={changeCartState}
-              disabled={apiStatus === "LOADING"}
+            <Snackbar
+              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              open={showSnackBar}
+              autoHideDuration={1000}
+              onClose={() => setShowSnackBar(false)}
             >
-              {apiStatus === "LOADING" ? (
-                <CircularProgress
-                  sx={{ color: "#faeee7" }}
-                  size={35}
-                  thickness={5}
-                />
-              ) : (
-                cartButtonText
-              )}
-            </button>
-          )}
+              <MuiAlert elevation={6} severity="success" variant="filled">
+                {snackbarMessage}
+              </MuiAlert>
+            </Snackbar>
+          </div>
         </>
       ) : null}
+      <Outlet />
     </div>
   );
 }

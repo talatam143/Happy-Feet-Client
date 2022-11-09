@@ -16,4 +16,5 @@
     height: 65px;
     background-color: #ffc6c7;
     border-radius: 50px;
+    z-index: 100;
 }

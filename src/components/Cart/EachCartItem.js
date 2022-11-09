@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Cookies from "js-cookie";
 import { AiOutlineClose } from "react-icons/ai";
-
 import Modal from "@mui/material/Modal";
 
+import { resetCart } from "../../stateslices/cartStateSlice";
 import { removeFromCart, updateQuantity } from "../../api/CartApi";
 import { DeleteIcon } from "../SVG/svgrepo";
 import "./Cart.css";
@@ -47,6 +47,7 @@ function EachCartItem(props) {
     const { status, responseData } = await updateQuantity(itemData);
     if (status === 200) {
       setQuantityModel(false);
+
       fetchCart();
       updateSnackBar(true, responseData.message);
     }

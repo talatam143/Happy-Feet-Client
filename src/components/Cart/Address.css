@@ -1,176 +1,176 @@
 .cartAddressContainer {
-  margin-top: 75px;
-}
-
-.cartSelectedAddressContainer {
-  margin: auto;
-  width: 90%;
-  padding: 10px;
-  border-radius: 10px;
-  background: radial-gradient(
-    200px circle at 350px 10px,
-    #c3f0ca 50%,
-    transparent 50.2%
-  );
-  background-color: #ffc6c7;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  color: #33272a;
-}
-
-.cartAddressPara {
-  margin: 0 0 2px 5px;
-}
-
-.cartAddressNameContainer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 5px;
-}
-
-.cartAddressBoldParas {
-  margin: 0;
-  font-weight: 600;
-  font-size: 17px;
-}
-
-.cartAddressTypePara {
-  margin: 0;
-  border: solid #e53170 3px;
-  padding: 0px 8px;
-  border-radius: 25px;
-  font-weight: 500;
-  font-size: 17px;
-}
-
-.cartAddressDefaultSpan {
-  font-size: 14px;
-  color: #594a4e;
-  font-weight: normal;
-  margin-left: 5px;
-}
-
-.cartChangeAddressButton {
-  width: 100%;
-  margin: 15px 0 10px 0;
-  height: 40px;
-  background-color: transparent;
-  border: solid #e53170 2px;
-  color: #e53170;
-  border-radius: 4px;
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.cartAddressDeliveryPara {
-  margin: 20px 0 10px 10px;
-  font-weight: 600;
-  font-size: 20px;
-  color: #33272a;
-}
-
-.cartAddressDeliveryContainer {
-  display: flex;
-  margin: auto;
-  margin-bottom: 5px;
-  align-items: center;
-  width: 90%;
-  padding: 10px;
-  border-radius: 10px;
-  background: radial-gradient(
-    200px circle at 350px 10px,
-    #c3f0ca 50%,
-    transparent 50.2%
-  );
-  background-color: #ffc6c7;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  color: #33272a;
-}
-
-.eachCartAddressImage {
-  width: 70px;
-  border-radius: 6px;
-}
-
-.eachCartAddressPara {
-  font-size: 16px;
-  margin-left: 10px;
-}
-
-.eachCartAddressDateSpan {
-  font-weight: 600;
-  font-size: 18px;
-}
-
-.selectAddressModalContainer {
-  width: 100%;
-  background-color: #faeee7;
-}
-.selectAddressHeaderContainer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 10px;
-  margin: 10px 0 5px 0;
-}
-
-.selectAddressModalCloseButton {
-  background-color: transparent;
-  border: none;
-  padding: 0;
-}
-
-.selectAddressModalCloseIcon {
-  font-size: 35px;
-  color: #33272a;
-}
-
-.selectAddressModalHeadingPara {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 500;
-  color: #33272a;
-}
-
-.selectAddressSubHeadingParas {
-  margin: 0 0 5px 10px;
-  font-weight: 500;
-  color: #33272a;
-}
-
-.modalDefaultAddressContainer {
-  display: flex;
-  background-color: #ffc6c7;
-  margin-bottom: 10px;
-  width: 100%;
-}
-
-.modalDefaultAddressLabel{
-  width: 100%;
-}
-
-.modalDefaultAddressSubContainer{
-  padding: 5px 0;
-  width: 100%;
-}
-
-.selectAddressModalSelectButton{
-  width: 60%;
-  margin-left: 20%;
-  margin-bottom: 10px;
-  background-color: #e53170;
-  border: none;
-  color: #faeee7;
-  border-radius: 3px;
-  padding: 6px 0;
-  font-size: 18px;
-  font-weight: 500;
-}
-
-.modalAddressTypePara{
-  margin: 0;
-  border: solid #e53170 2px;
-  padding: 0px 8px;
-  border-radius: 25px;
-  font-size: 14px;
-}
+    margin-top: 75px;
+  }
+  
+  .cartSelectedAddressContainer {
+    margin: auto;
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    background: radial-gradient(
+      200px circle at 350px 10px,
+      #c3f0ca 50%,
+      transparent 50.2%
+    );
+    background-color: #ffc6c7;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    color: #33272a;
+  }
+  
+  .cartAddressPara {
+    margin: 0 0 2px 5px;
+  }
+  
+  .cartAddressNameContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 5px;
+  }
+  
+  .cartAddressBoldParas {
+    margin: 0;
+    font-weight: 600;
+    font-size: 17px;
+  }
+  
+  .cartAddressTypePara {
+    margin: 0;
+    border: solid #e53170 3px;
+    padding: 0px 8px;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 17px;
+  }
+  
+  .cartAddressDefaultSpan {
+    font-size: 14px;
+    color: #594a4e;
+    font-weight: normal;
+    margin-left: 5px;
+  }
+  
+  .cartChangeAddressButton {
+    width: 100%;
+    margin: 15px 0 10px 0;
+    height: 40px;
+    background-color: transparent;
+    border: solid #e53170 2px;
+    color: #e53170;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .cartAddressDeliveryPara {
+    margin: 20px 0 10px 10px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #33272a;
+  }
+  
+  .cartAddressDeliveryContainer {
+    display: flex;
+    margin: auto;
+    margin-bottom: 5px;
+    align-items: center;
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    background: radial-gradient(
+      200px circle at 350px 10px,
+      #c3f0ca 50%,
+      transparent 50.2%
+    );
+    background-color: #ffc6c7;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    color: #33272a;
+  }
+  
+  .eachCartAddressImage {
+    width: 70px;
+    border-radius: 6px;
+  }
+  
+  .eachCartAddressPara {
+    font-size: 16px;
+    margin-left: 10px;
+  }
+  
+  .eachCartAddressDateSpan {
+    font-weight: 600;
+    font-size: 18px;
+  }
+  
+  .selectAddressModalContainer {
+    width: 100%;
+    background-color: #faeee7;
+  }
+  .selectAddressHeaderContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    margin: 10px 0 5px 0;
+  }
+  
+  .selectAddressModalCloseButton {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+  }
+  
+  .selectAddressModalCloseIcon {
+    font-size: 35px;
+    color: #33272a;
+  }
+  
+  .selectAddressModalHeadingPara {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: #33272a;
+  }
+  
+  .selectAddressSubHeadingParas {
+    margin: 0 0 5px 10px;
+    font-weight: 500;
+    color: #33272a;
+  }
+  
+  .modalDefaultAddressContainer {
+    display: flex;
+    background-color: #ffc6c7;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  .modalDefaultAddressLabel{
+    width: 100%;
+  }
+  
+  .modalDefaultAddressSubContainer{
+    padding: 5px 0;
+    width: 100%;
+  }
+  
+  .selectAddressModalSelectButton{
+    width: 60%;
+    margin-left: 20%;
+    margin-bottom: 10px;
+    background-color: #e53170;
+    border: none;
+    color: #faeee7;
+    border-radius: 3px;
+    padding: 6px 0;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  .modalAddressTypePara{
+    margin: 0;
+    border: solid #e53170 2px;
+    padding: 0px 8px;
+    border-radius: 25px;
+    font-size: 14px;
+  }

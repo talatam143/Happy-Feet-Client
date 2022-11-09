@@ -28,7 +28,7 @@ function ViewProduct() {
   const [sizeError, setSizeError] = useState(false);
   const [cartError, setCartError] = useState(false);
   const [cartErrorMessage, setCartErrorMessage] = useState(false);
-  const [addedToBag, setAddedToBag] = useState(false)
+  const [addedToBag, setAddedToBag] = useState(false);
   const [isWhishList, setIsWhishList] = useState(false);
   const [showSnackBar, setShowSnackBar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -48,30 +48,35 @@ function ViewProduct() {
     }
   };
 
-  const addToBag = async() => {
-    setCartError(false)
-    if(addedToBag){
+  const addToBag = async () => {
+    setCartError(false);
+    if (addedToBag) {
       navigate("/cart");
-    } else{
-    if (selectedSize === null) {
-      setSizeError(true);
-    } else{
-      const getNum = Cookies.get("num");
-      if (getNum === undefined) {
-        navigate("/login");
+    } else {
+      if (selectedSize === null) {
+        setSizeError(true);
       } else {
-        let data = {id :product._id , quantity:1, size: selectedSize, mobileNumber:getNum}
-        const{status, responseData} = await addToCart(data);
-        if(status === 200){
-          setAddedToBag(true);
-        } else{
-          setAddedToBag(true);
-          setCartError(true)
-          setCartErrorMessage(responseData.error)
+        const getNum = Cookies.get("num");
+        if (getNum === undefined) {
+          navigate("/login");
+        } else {
+          let data = {
+            id: product._id,
+            quantity: 1,
+            size: selectedSize,
+            mobileNumber: getNum,
+          };
+          const { status, responseData } = await addToCart(data);
+          if (status === 200) {
+            setAddedToBag(true);
+          } else {
+            setAddedToBag(true);
+            setCartError(true);
+            setCartErrorMessage(responseData.error);
+          }
         }
       }
     }
-  }
   };
 
   const toggleWishList = async () => {
@@ -98,7 +103,6 @@ function ViewProduct() {
       }
     }
   };
-
 
   return (
     <>
@@ -174,28 +178,36 @@ function ViewProduct() {
           <div className="productViewSelectSizeContainer">
             <p className="productViewSelectSizePara">Select Size</p>
             <div className="eachSizeContainer">
-              {product.size_quantity.sort((a,b) => Number(a.size) < Number(b.size) ? -1 : 1).map(
-                (eachSize) =>
-                  eachSize.quantity > 0 && (
-                    <p
-                      key={eachSize.size}
-                      className={
-                        eachSize.size === selectedSize
-                          ? "eachSelectedSizePara"
-                          : "eachSizePara"
-                      }
-                      onClick={() => {
-                        setSelectedSize(eachSize.size);
-                        setSizeError(false);
-                        setCartError(false)
-                      }}
-                    >
-                      {eachSize.size}
-                    </p>
-                  )
-              )}
+              {product.size_quantity
+                .sort((a, b) => (Number(a.size) < Number(b.size) ? -1 : 1))
+                .map(
+                  (eachSize) =>
+                    eachSize.quantity > 0 && (
+                      <div className="productViewQuantityDisplay" key={eachSize.size}>
+                        <p
+                          className={
+                            eachSize.size === selectedSize
+                              ? "eachSelectedSizePara"
+                              : "eachSizePara"
+                          }
+                          onClick={() => {
+                            setSelectedSize(eachSize.size);
+                            setSizeError(false);
+                            setCartError(false);
+                          }}
+                        >
+                          {eachSize.size}
+                        </p>
+                        {eachSize.quantity < 10 &&
+                        <p className="productViewQuantityDisplayPara">{eachSize.quantity} left</p>
+                        }
+                      </div>
+                    )
+                )}
             </div>
-            {sizeError ? <p className="selectSizeErrorPara">Select Size</p> : null}
+            {sizeError ? (
+              <p className="selectSizeErrorPara">Select Size</p>
+            ) : null}
           </div>
           <div className="productViewButtonsContainer">
             <button className="productViewAddToBagButton" onClick={addToBag}>
@@ -212,7 +224,9 @@ function ViewProduct() {
               )}{" "}
             </button>
           </div>
-          {cartError ? <p className="selectSizeErrorPara">{cartErrorMessage}</p> : null}
+          {cartError ? (
+            <p className="selectSizeErrorPara">{cartErrorMessage}</p>
+          ) : null}
         </div>
       ) : null}
       <Snackbar

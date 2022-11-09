@@ -16,6 +16,8 @@ import { getWishList } from "./api/WishListApi";
 import Login from "./components/Login/Login";
 import ViewProduct from "./components/Products/ViewProduct";
 import UpdateUser from "./components/Login/UpdateUser";
+import SelectAddress from "./components/Cart/SelectAddress";
+import Payment from "./components/Cart/Payment";
 
 function App() {
   const location = useLocation();
@@ -58,7 +60,11 @@ function App() {
       <Route path="/" element={<Home />}>
         <Route path="/" element={<Welcomepage />} />
         <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart">
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart/address" element={<SelectAddress />} />
+          <Route path="/cart/payments" element={<Payment />} />
+        </Route>
         <Route path="/account" element={<Profile />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ViewProduct />} />

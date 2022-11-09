@@ -1,108 +1,106 @@
-.productViewBackContainer{
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index:100;
+.productViewBackContainer {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
 }
-.productViewBackIcon{
-    border: none;
-    background-color: transparent;
-}
-
-.productViewContainer{
-    display: flex;
-    flex-direction: column;
+.productViewBackIcon {
+  border: none;
+  background-color: transparent;
 }
 
-.productViewHeadingContainer{
-    display: flex;
-    justify-content: space-between;
-    margin: 5px 20px 0 20px;
+.productViewContainer {
+  display: flex;
+  flex-direction: column;
 }
 
-.productViewHeadingPara{
-    margin: 0;
-    font-size: 22px;
-    font-weight: 600;
-    color: #33272a;
+.productViewHeadingContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 20px 0 20px;
 }
 
-.productViewHeadingPricePara{
-    margin: 0;
-    font-size: 22px;
-    font-weight: 600;
-    color: #33272a;
-    width: 25%;
+.productViewHeadingPara {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #33272a;
 }
 
-.productViewBrandNamePara{
-    margin: 15px 0 0 20px;
-    font-size: 24px;
-    font-weight: 700;
-    color: #33272a;
+.productViewHeadingPricePara {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #33272a;
+  width: 25%;
 }
 
-.productViewSelectSizePara{
-    margin: 5px 0 0 0;
-    font-size: 20px;
-    font-weight: 600;
-    color: #33272a;
+.productViewBrandNamePara {
+  margin: 15px 0 0 20px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #33272a;
 }
 
-.productViewSelectSizeContainer{
-    margin: 15px 20px 0 20px;
+.productViewSelectSizePara {
+  margin: 5px 0 0 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #33272a;
 }
 
-.eachSizeContainer{
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 0 10px 0 10px;
+.productViewSelectSizeContainer {
+  margin: 15px 20px 0 20px;
 }
 
-.eachSizePara{
-    margin: 5px 10px 5px 0;
-    font-size: 18px;
-    border: solid 1px #594a4e;
-    border-radius: 10px;
-    padding: 10px 24px;
+.eachSizeContainer {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin: 0 10px 0 10px;
 }
 
-
-.eachSelectedSizePara{
-    margin: 8px 8px 8px 0;
-    font-size: 20px;
-    font-weight: 500;
-    border: solid 3px #594a4e;
-    border-radius: 10px;
-    padding: 7px 21px;
+.eachSizePara {
+  margin: 5px 10px 5px 0;
+  font-size: 18px;
+  border: solid 1px #594a4e;
+  border-radius: 10px;
+  padding: 10px 24px;
 }
 
-.productViewButtonsContainer{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 20px 20px 10px 20px;
+.eachSelectedSizePara {
+  margin: 8px 8px 8px 0;
+  font-size: 20px;
+  font-weight: 500;
+  border: solid 3px #594a4e;
+  border-radius: 10px;
+  padding: 7px 21px;
 }
 
-.productViewAddToBagButton{
-    width: 90%;
-    background-color: #e53170;
-    color: #faeee7;
-    border: none;
-    height: 46px;
-    border-radius: 6px;
-    font-size: 18px;
-    font-weight: 600;
-    margin-right: 10px;
+.productViewButtonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 20px 10px 20px;
 }
 
-.productViewWishlistButton{
-    background-color: transparent;
-    border: solid 2px #33272a;
-    border-radius: 6px;
+.productViewAddToBagButton {
+  width: 90%;
+  background-color: #e53170;
+  color: #faeee7;
+  border: none;
+  height: 46px;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-right: 10px;
 }
 
+.productViewWishlistButton {
+  background-color: transparent;
+  border: solid 2px #33272a;
+  border-radius: 6px;
+}
 
 .swiper {
   width: 90%;
@@ -146,9 +144,22 @@
   padding: 0 !important;
 }
 
-.selectSizeErrorPara{
-    margin: 0;
-    font-weight: 600;
-    color: #F44336;
-    text-align: center;
+.selectSizeErrorPara {
+  margin: 0;
+  font-weight: 600;
+  color: #f44336;
+  text-align: center;
+}
+
+.productViewQuantityDisplay {
+  display: flex;
+  flex-direction: column;
+}
+
+.productViewQuantityDisplayPara {
+  margin: -5px;
+  font-size: 14px;
+  align-self: center;
+  color: #f44336;
+  margin-bottom: 2px;
 }

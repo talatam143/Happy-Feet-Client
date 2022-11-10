@@ -6,7 +6,7 @@ import "./Skeleton.css";
 function WelcomeSkeleton() {
   const count = [0, 1, 2, 3, 4, 5,6,7,8];
   return (
-    <>
+    <div className="zIndexSkeleton">
       <Skeleton
         variant="rectangular"
         width={260}
@@ -40,7 +40,7 @@ function WelcomeSkeleton() {
         sx={{ m: "auto", mt: 2,borderRadius: 2 }}
         animation="wave"
       />
-    </>
+    </div>
   );
 }
 

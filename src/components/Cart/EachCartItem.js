@@ -1,21 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { AiOutlineClose } from "react-icons/ai";
 import Modal from "@mui/material/Modal";
 
-import { resetCart } from "../../stateslices/cartStateSlice";
 import { removeFromCart, updateQuantity } from "../../api/CartApi";
 import { DeleteIcon } from "../SVG/svgrepo";
 import "./Cart.css";
 import { addToWishList } from "../../api/WishListApi";
 
-const quantityArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const initialQuantityArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 function EachCartItem(props) {
   const { data, fetchCart, updateSnackBar } = props;
   const [openRemoveModal, setOpenRemoveModal] = useState(false);
   const [quantityModel, setQuantityModel] = useState(false);
   const [selectQuantity, setSelectQuantity] = useState(data.quantity);
+  const [quantityArray, setQuantityArray] = useState([]);
+
+  useEffect(() => {
+    if (data.availableQuantity > 10) {
+      setQuantityArray(initialQuantityArray);
+    } else{
+      setQuantityArray(initialQuantityArray.slice(0,data.availableQuantity));
+    }
+  }, []);
 
   const updateCart = async () => {
     const getNum = Cookies.get("num");

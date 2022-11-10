@@ -138,7 +138,7 @@ function Cart() {
                         <span className="greenFreeSpan">FREE</span>{" "}
                       </p>
                     ) : (
-                      <p className="cartPriceMiniParas">{cartState.cartPriceData.Convenience}</p>
+                      <p className="cartPriceMiniParas">{cartState.cartPriceData.convenienceFee}</p>
                     )}
                   </div>
                   <hr className="cartPriceHR" />

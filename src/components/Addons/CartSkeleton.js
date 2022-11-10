@@ -1,11 +1,12 @@
 import React from "react";
 import Skeleton from "@mui/material/Skeleton";
 
+import "./Skeleton.css";
+
 function CartSkeleton() {
   const count = [0, 1, 2];
   return (
-    <>
-      <div className="welcomeSkeletonContainer" style={{ marginTop: "70px" }}>
+      <div className="zIndexSkeletonCart" style={{ marginTop: "70px"}}>
         {count.map((each) => (
           <Skeleton
             key={each}
@@ -30,9 +31,7 @@ function CartSkeleton() {
           sx={{ borderRadius: 5,mt: 1 }}
           animation="wave"
         />
-
       </div>
-    </>
   );
 }
 

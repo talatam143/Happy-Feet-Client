@@ -1,10 +1,12 @@
 import React from "react";
 import Skeleton from "@mui/material/Skeleton";
 
+import "./Skeleton.css";
+
 function ProductSkeleton() {
-  const count = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const count = [0, 1, 2, 3, 4,5,7,8];
   return (
-    <>
+    <div className="zIndexSkeleton">
       <Skeleton
         variant="rectangular"
         width={260}
@@ -24,7 +26,7 @@ function ProductSkeleton() {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 }
 

@@ -16,12 +16,14 @@ import "swiper/css/effect-creative";
 import "swiper/css/thumbs";
 import { ArrowLeft, ToggleWishListIcon } from "../SVG/svgrepo";
 import { addToCart } from "../../api/CartApi";
+import ProductViewSkeleton from "../Addons/ProductViewSkeleton";
 
 function ViewProduct() {
   const params = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState({});
   const user = useSelector((state) => state.userState);
+  const pageState = useSelector((state) => state.pageState);
   const [fetchedProduct, setFetchProduct] = useState(false);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
@@ -106,6 +108,7 @@ function ViewProduct() {
 
   return (
     <>
+      {pageState.loading && <ProductViewSkeleton />}
       {fetchedProduct ? (
         <div className="productViewContainer">
           <div className="productViewBackContainer">
@@ -183,7 +186,10 @@ function ViewProduct() {
                 .map(
                   (eachSize) =>
                     eachSize.quantity > 0 && (
-                      <div className="productViewQuantityDisplay" key={eachSize.size}>
+                      <div
+                        className="productViewQuantityDisplay"
+                        key={eachSize.size}
+                      >
                         <p
                           className={
                             eachSize.size === selectedSize
@@ -198,9 +204,11 @@ function ViewProduct() {
                         >
                           {eachSize.size}
                         </p>
-                        {eachSize.quantity < 10 &&
-                        <p className="productViewQuantityDisplayPara">{eachSize.quantity} left</p>
-                        }
+                        {eachSize.quantity < 10 && (
+                          <p className="productViewQuantityDisplayPara">
+                            {eachSize.quantity} left
+                          </p>
+                        )}
                       </div>
                     )
                 )}

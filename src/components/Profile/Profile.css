@@ -80,6 +80,12 @@
     align-items: baseline;
 }
 
+.accountButtonLinks{
+    width: 100%;
+    text-decoration: none;
+    color: #33272a;
+}
+
 .accountNormalButton{
     background-color: transparent;
     border: none;
@@ -125,4 +131,13 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+}
+
+
+.eachCardValidThruContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    margin-left: 10px;
 }

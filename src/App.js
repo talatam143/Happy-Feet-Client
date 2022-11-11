@@ -18,6 +18,8 @@ import ViewProduct from "./components/Products/ViewProduct";
 import UpdateUser from "./components/Login/UpdateUser";
 import SelectAddress from "./components/Cart/SelectAddress";
 import Payment from "./components/Cart/Payment";
+import SavedAddress from "./components/Profile/Saved Address/SavedAddress";
+import SavedCards from "./components/Profile/SavedCards/SavedCards";
 
 function App() {
   const location = useLocation();
@@ -65,7 +67,11 @@ function App() {
           <Route path="/cart/address" element={<SelectAddress />} />
           <Route path="/cart/payments" element={<Payment />} />
         </Route>
-        <Route path="/account" element={<Profile />} />
+        <Route path="/account">
+          <Route path="/account" element={<Profile />} />
+          <Route path="myaddress" element={<SavedAddress />} />
+          <Route path="mycards" element={<SavedCards />} />
+        </Route>
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ViewProduct />} />
       </Route>

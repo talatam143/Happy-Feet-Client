@@ -149,8 +149,8 @@ export const SortIcon = (props) => {
 export const ArrowLeft = () => {
   return (
     <svg
-      width="45"
-      height="45"
+      width="35"
+      height="40"
       viewBox="0 0 24 24"
       stroke-width="2.5"
       stroke="#33272a"

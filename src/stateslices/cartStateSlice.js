@@ -17,7 +17,6 @@ export const cartStateSlice = createSlice({
       state.cartItems = payload.payload.data;
     },
     addCartAddress: (state, payload) => {
-      console.log(payload)
       state.isAddressInitialized = true;
       state.cartAddress = payload.payload;
     },

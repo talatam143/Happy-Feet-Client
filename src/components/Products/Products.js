@@ -141,6 +141,7 @@ function Products() {
   const resetFilters = () => {
     setFilters(initialFilterList);
     setSelectedCategory(categories[0]);
+    setShowFilter(false);
     navigate({
       pathname: "",
     });
@@ -204,6 +205,37 @@ function Products() {
 
   return (
     <div>
+      <div className="accountMyAddressHeaderContainer">
+        <button
+          onClick={() => navigate(-1)}
+          className="myAddressHeaderArrowButton"
+        >
+          <ArrowLeft />
+        </button>
+        <div>
+          <p
+            style={{
+              margin: "0 0 0 10px",
+              fontSize: "18px",
+              color: "#33272a",
+              fontWeight:600
+            }}
+          >
+            Products
+          </p>
+          {pageState.success && (
+            <p
+              style={{
+                margin: "0 0 0 10px",
+                fontSize: "14px",
+                color: "#594a4e",
+              }}
+            >
+              {products.length} products
+            </p>
+          )}
+        </div>
+      </div>
       {pageState.loading ? (
         <ProductSkeleton />
       ) : (

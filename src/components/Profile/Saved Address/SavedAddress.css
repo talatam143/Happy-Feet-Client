@@ -1,0 +1,234 @@
+.accountMyAddressHeaderContainer {
+  background-color: #ffc6c7;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 55px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.myAddressHeaderHeading {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 10px;
+  color: #33272a;
+}
+
+.myAddressHeaderArrowButton {
+  background-color: transparent;
+  padding: 0;
+  border: none;
+}
+
+.myAddressEmptyContainer {
+  margin-top: 70px;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.noAddressPara {
+  margin: 0;
+  font-size: 22px;
+  color: #33272a;
+  font-weight: 600;
+}
+
+.noAddressPlusSpan {
+  margin: 0;
+  color: #e53170;
+  font-weight: 500;
+  font-size: 50px;
+  position: relative;
+  top: 10px;
+}
+
+.MyAddressListContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.myAddressBodyContainer {
+  margin-top: 70px;
+}
+
+.eachMyAddressContainer {
+  width: 90%;
+  padding: 15px 10px;
+  border-radius: 10px;
+  background: radial-gradient(
+    200px circle at 350px 10px,
+    #c3f0ca 50%,
+    transparent 50.2%
+  );
+  background-color: #ffc6c7;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  color: #33272a;
+  margin: 5px;
+}
+
+.eachMySubAddressContainer,
+.eachMySubActionsAddressContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.boldMyAddressPara {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #33272a;
+  margin: 7px 0;
+}
+
+.myAddressParas {
+  margin: 7px 0;
+  font-size: 18px;
+  color: #594a4e;
+  font-weight: 500;
+}
+
+.myAddressDefaultPara {
+  margin: 0;
+  background-color: #00c853;
+  padding: 0 10px;
+  border-radius: 25px;
+  font-weight: 500;
+  color: #33272a;
+  font-size: 16px;
+}
+
+.myAddressHomeIcon {
+  margin: 0 15px;
+  font-size: 28px;
+  stroke-width: 0.1px;
+  color: #212121;
+}
+
+.eachCardThreeDotsButton {
+  background-color: #9e9e9e;
+  border: none;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  padding: 4px 7px;
+  transition: 0.4s;
+}
+
+.eachCardThreeDotsIcon {
+  font-size: 20px;
+  stroke-width: 0.5px;
+  color: #212121;
+}
+
+.eachCardThreeDotsButton:hover {
+  background-color: #e53170;
+  transition: 0.4s;
+}
+
+.myAddressActionButtonsContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  right: 20px;
+  background-color: #9e9e9e;
+  padding: 5px 0;
+  border-radius: 10px;
+  transition: 0.4s ease-out;
+  width: 70px;
+  height: 53px;
+}
+
+.eachAddressEachActionButton {
+  width: 70px;
+  background-color: transparent;
+  border: none;
+  color: #212121;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 3px 0 5px 10px;
+  text-align: left;
+}
+
+.hideMyAddressActionButtonsContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  right: 20px;
+  background-color: #9e9e9e;
+  padding: 5px 0;
+  border-radius: 10px;
+  transition: 0.1s;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  transition: 0.4s ease-out;
+}
+
+.addNewAddressButton {
+  background-color: transparent;
+  border: solid 2px #e53170;
+  border-radius: 4px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #e53170;
+  display: flex;
+  align-items: center;
+  padding: 5px 7px;
+}
+
+.addNewAddressIcon {
+  color: #212121;
+  font-size: 32px;
+  margin-right: 10px;
+}
+
+.addNewAddressContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0 10px 10px 0;
+}
+
+.eachCardDeletePromptContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.eachCardDeletePromptPara {
+  margin: 0;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.eachCardDeletePromptYesButtons {
+  background-color: transparent;
+  border: solid #e53170 3px;
+  border-radius: 4px;
+  padding: 5px 8px;
+  color: #e53170;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 3px;
+}
+
+.eachCardDeletePromptNoButtons {
+  background-color: #00c853;
+  border: solid #00c853 3px;
+  border-radius: 4px;
+  padding: 5px 12px;
+  color: #212121;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 3px;
+}

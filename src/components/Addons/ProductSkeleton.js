@@ -4,9 +4,9 @@ import Skeleton from "@mui/material/Skeleton";
 import "./Skeleton.css";
 
 function ProductSkeleton() {
-  const count = [0, 1, 2, 3, 4,5,7,8];
+  const count = [0, 1, 2, 3, 4, 5, 7, 8];
   return (
-    <div className="zIndexSkeleton">
+    <div className="zIndexSkeleton" style={{ marginTop: "40px" }}>
       <Skeleton
         variant="rectangular"
         width={260}

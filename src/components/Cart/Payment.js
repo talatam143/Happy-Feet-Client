@@ -143,64 +143,62 @@ function Payment() {
               <div className="cartPaymentCardsContainer">
                 <p className="cartCheckOutHeading">Cards</p>
                 {cardsList.map((eachCard) => (
-                  <>
-                    <div
-                      key={eachCard.id}
-                      className="cartPaymentEachCardContainer"
+                  <div
+                    key={eachCard.id}
+                    className="cartPaymentEachCardContainer"
+                  >
+                    <input
+                      type="radio"
+                      value={eachCard.id}
+                      id={eachCard.id}
+                      name="card"
+                      checked={handleSelectedId === eachCard.id}
+                      onChange={handleCardChange}
+                    />
+                    <label
+                      htmlFor={eachCard.id}
+                      className="cartPaymentEachCardLabel"
                     >
-                      <input
-                        type="radio"
-                        value={eachCard.id}
-                        id={eachCard.id}
-                        name="card"
-                        checked={handleSelectedId === eachCard.id}
-                        onChange={handleCardChange}
-                      />
-                      <label
-                        htmlFor={eachCard.id}
-                        className="cartPaymentEachCardLabel"
-                      >
-                        <div className="cartPaymentEachCardSubContainer">
-                          <p className="cartPaymentEachCardPars">
-                            **** **** **** {eachCard.fourDigits}
-                          </p>
-                          {handleSelectedId === eachCard.id && (
-                            <div className="cartPaymentEachCardVerifyContainer">
-                              {paymentStatus !== "SUCCESS" && (
-                                <input
-                                  type="number"
-                                  placeholder="CVV"
-                                  value={cvv}
-                                  onChange={handleCvv}
-                                  className="cartPaymentEachCardCvv"
-                                  maxLength={3}
-                                />
-                              )}
-                              <PaymentStage />
-                            </div>
-                          )}
-                        </div>
-                        <div className="cartPaymentEachCardSubContainer">
-                          <p className="cartPaymentEachCardPars">
-                            {eachCard.cardholder}
-                          </p>
-                          <p className="cartPaymentEachCardPars">
-                            <span>ValidThru : </span>
-                            {eachCard.validThru.toString().slice(0, 2)}/
-                            {eachCard.validThru.toString().slice(-2)}
-                          </p>
-                        </div>
-                      </label>
-                    </div>
-                    <button
-                      style={{ width: "90%", marginLeft: "5%" }}
-                      className="cartChangeAddressButton"
-                      onClick={() => navigate("/account/mycards")}
-                    >
-                      ADD CARDS
-                    </button>
-                  </>
+                      <div className="cartPaymentEachCardSubContainer">
+                        <p className="cartPaymentEachCardPars">
+                          **** **** **** {eachCard.fourDigits}
+                        </p>
+                        {handleSelectedId === eachCard.id && (
+                          <div className="cartPaymentEachCardVerifyContainer">
+                            {paymentStatus !== "SUCCESS" && (
+                              <input
+                                type="number"
+                                placeholder="CVV"
+                                value={cvv}
+                                onChange={handleCvv}
+                                className="cartPaymentEachCardCvv"
+                                maxLength={3}
+                              />
+                            )}
+                            <PaymentStage />
+                          </div>
+                        )}
+                      </div>
+                      <div className="cartPaymentEachCardSubContainer">
+                        <p className="cartPaymentEachCardPars">
+                          {eachCard.cardholder}
+                        </p>
+                        <p className="cartPaymentEachCardPars">
+                          <span>ValidThru : </span>
+                          {eachCard.validThru.toString().slice(0, 2)}/
+                          {eachCard.validThru.toString().slice(-2)}
+                        </p>
+                      </div>
+                    </label>
+                  </div>
                 ))}
+                <button
+                  style={{ width: "95%", margin: 0 }}
+                  className="cartChangeAddressButton"
+                  onClick={() => navigate("/account/mycards")}
+                >
+                  ADD CARDS
+                </button>
                 {paymentError && (
                   <p className="cardCvvErrorMessage">
                     *Invalid CVV or Something went wrong

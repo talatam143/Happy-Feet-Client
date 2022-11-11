@@ -44,16 +44,14 @@ function Wishlist() {
   return (
     <div>
       {pageState.loading && <ProductSkeleton />}
+      <div className="wishListHeadingContainer">
+        <p className="wishListHeadingPara">Wishlist</p>
+        {whishListItems.length > 0 ? (
+          <p className="wishListCountPara">{whishListItems.length} products</p>
+        ) : null}
+      </div>
       {pageState.success ? (
         <>
-          <div className="wishListHeadingContainer">
-            <p className="wishListHeadingPara">Wishlist</p>
-            {whishListItems.length > 0 ? (
-              <p className="wishListCountPara">
-                {whishListItems.length} products
-              </p>
-            ) : null}
-          </div>
           {whishListItems.length > 0 ? (
             <div className="wishListProductsContainer">
               {whishListItems.map((eachProduct) => (

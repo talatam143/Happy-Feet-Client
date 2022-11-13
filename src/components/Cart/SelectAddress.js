@@ -179,7 +179,7 @@ function SelectAddress() {
                   alt="itemImage"
                   className="eachCartAddressImage"
                 />
-                {addressList.length > 1 ? (
+                {addressList.length > 0 ? (
                   <p className="eachCartAddressPara">
                     Estimated delivery by{" "}
                     <span className="eachCartAddressDateSpan">
@@ -223,13 +223,10 @@ function SelectAddress() {
                     <GrFormClose className="selectAddressModalCloseIcon" />
                   </button>
                 </div>
-
+                <p className="selectAddressSubHeadingParas">Default</p>
                 {addressList.map(
                   (eachAddress) =>
                     eachAddress.default === true && (
-                      <>
-                        <p className="selectAddressSubHeadingParas">Default</p>
-
                         <div
                           className="modalDefaultAddressContainer"
                           key={eachAddress.id}
@@ -276,7 +273,6 @@ function SelectAddress() {
                             </div>
                           </label>
                         </div>
-                      </>
                     )
                 )}
 

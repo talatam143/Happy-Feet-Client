@@ -84,6 +84,7 @@ function Payment() {
 
   const goToCheckout = () => {
     if (cartState.isPaymentDone) {
+      console.log(cartState)
     } else {
       setVerifyError(true);
     }

@@ -7,6 +7,13 @@ function WelcomeSkeleton() {
   const count = [0, 1, 2, 3, 4, 5,6,7,8];
   return (
     <div className="zIndexSkeleton">
+    <Skeleton
+        variant="rectangular"
+        width="90%"
+        height={170}
+        sx={{ m: "auto", mt: 2,borderRadius: 2 }}
+        animation="wave"
+      />
       <Skeleton
         variant="rectangular"
         width={260}

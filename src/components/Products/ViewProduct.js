@@ -137,7 +137,7 @@ function ViewProduct() {
             }}
             thumbs={{ swiper: thumbsSwiper }}
             modules={[EffectCreative, Pagination, Thumbs]}
-            className="mySwiper"
+            className="prodictImageswiper"
           >
             {product.files.map((eachFile) => (
               <SwiperSlide key={eachFile.filePath}>

@@ -5,11 +5,11 @@ export const HomeIcon = (props) => {
       width="36"
       height="36"
       viewBox="0 0 24 24"
-      stroke-width="2"
+      strokeWidth="2"
       stroke={color}
       fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <polyline points="5 12 3 12 12 3 21 12 19 12" />
@@ -26,11 +26,11 @@ export const CartIcon = (props) => {
       width="34"
       height="34"
       viewBox="0 0 24 24"
-      stroke-width="2"
+      strokeWidth="2"
       stroke={color}
       fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <circle cx="6" cy="19" r="2" />
@@ -48,11 +48,11 @@ export const WishlistIcon = (props) => {
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      stroke-width="2"
+      strokeWidth="2"
       stroke={color}
       fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
@@ -67,11 +67,11 @@ export const UserIcon = (props) => {
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      stroke-width="2"
+      strokeWidth="2"
       stroke={color}
       fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <circle cx="12" cy="10" r="4" />
       <path d="M6 24v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
@@ -86,11 +86,11 @@ export const ToggleWishListIcon = (props) => {
       width="32"
       height="32"
       viewBox="0 0 24 24"
-      stroke-width="2"
+      strokeWidth="2"
       stroke={color}
       fill={fill}
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
@@ -105,11 +105,11 @@ export const FilterIcon = (props) => {
       width="34"
       height="34"
       viewBox="0 0 24 24"
-      stroke-width="2"
+      strokeWidth="2"
       stroke={color}
       fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <circle cx="6" cy="10" r="2" />
@@ -133,11 +133,11 @@ export const SortIcon = (props) => {
       width="34"
       height="34"
       viewBox="0 0 24 24"
-      stroke-width="2"
+      strokeWidth="2"
       stroke={color}
       fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M3 9l4 -4l4 4m-4 -4v14" />
@@ -152,11 +152,11 @@ export const ArrowLeft = () => {
       width="35"
       height="40"
       viewBox="0 0 24 24"
-      stroke-width="2.5"
+      strokeWidth="2.5"
       stroke="#33272a"
       fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <line x1="5" y1="12" x2="19" y2="12" />
@@ -173,11 +173,11 @@ export const OrderBox = (props) => {
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      stroke-width="2"
+      strokeWidth="2"
       stroke={color}
       fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3" />
@@ -195,11 +195,11 @@ export const CouponIcon = (props) => {
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      stroke-width="2"
+      strokeWidth="2"
       stroke={color}
       fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <line x1="15" y1="5" x2="15" y2="7" />
@@ -216,11 +216,11 @@ export const RightIcon = () => {
       width="28"
       height="28"
       viewBox="0 0 24 24"
-      stroke-width="2"
+      strokeWidth="2"
       stroke="#33272a"
       fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <polyline points="9 6 15 12 9 18" />
@@ -234,11 +234,11 @@ export const DeleteIcon = () => {
       width="28"
       height="28"
       viewBox="0 0 24 24"
-      stroke-width="2.2"
+      strokeWidth="2.2"
       stroke="#33272a"
       fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <line x1="4" y1="7" x2="20" y2="7" />

@@ -20,6 +20,8 @@ import SelectAddress from "./components/Cart/SelectAddress";
 import Payment from "./components/Cart/Payment";
 import SavedAddress from "./components/Profile/Saved Address/SavedAddress";
 import SavedCards from "./components/Profile/SavedCards/SavedCards";
+import OrderSuccessful from "./components/Orders/OrderSuccessful";
+import { verifyUser } from "./api/Login";
 
 function App() {
   const location = useLocation();
@@ -33,10 +35,18 @@ function App() {
       }
     }
     let getNumber = Cookies.get("num");
+    let getToken = Cookies.get("HappyT")
+    if(getToken !== undefined){
+      validateUser()
+    }
     if (getNumber !== undefined) {
       fetchWishList();
     }
   }, [location]);
+
+  const validateUser = async() =>{
+    await verifyUser()
+  }
 
   const fetchWishList = async () => {
     await getWishList();
@@ -75,6 +85,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ViewProduct />} />
       </Route>
+      <Route path="ordersuccess" element={<OrderSuccessful/>}/>
       <Route path="/updateuser" element={<UpdateUser />} />
       <Route path="/login" element={<Login />} />
     </Routes>

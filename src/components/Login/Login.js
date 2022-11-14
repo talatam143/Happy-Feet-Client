@@ -1,10 +1,11 @@
-import React, {  useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { motion } from "framer-motion";
 import CircularProgress from "@mui/material/CircularProgress";
 import Cookies from "js-cookie";
+import { MdOutlineClose } from "react-icons/md";
 
 import "./Login.css";
 import logo from "../../images/darklogo.png";
@@ -33,10 +34,10 @@ function Login() {
 
   useEffect(() => {
     let isLoggedIn = Cookies.get("HappyT");
-    if(isLoggedIn !== undefined){
-      navigate(-1)
+    if (isLoggedIn !== undefined) {
+      navigate(-1);
     }
-  })
+  });
 
   const handleOtpChange = (e) => {
     let { name, value, maxLength } = e.target;
@@ -60,51 +61,50 @@ function Login() {
     }
   };
 
-  const deliverOtp = async() =>{
+  const deliverOtp = async () => {
     let data = { number: mobileNumber };
-        setIsLoading(true);
-        let { status, responseData } = await sendOtp(data);
-        if (status === 200) {
-          setIsLoading(false);
-          setFormState(true);
-          setSnackBarState(true);
-          setShowSnackBar(true);
-          setSnackBarMessage(responseData.message);
-        } else {
-          setIsLoading(false);
-          setSnackBarState(false);
-          setShowSnackBar(true);
-          setSnackBarMessage("Something went wrong. Try again");
-        }
-  }
+    setIsLoading(true);
+    let { status, responseData } = await sendOtp(data);
+    if (status === 200) {
+      setIsLoading(false);
+      setFormState(true);
+      setSnackBarState(true);
+      setShowSnackBar(true);
+      setSnackBarMessage(responseData.message);
+    } else {
+      setIsLoading(false);
+      setSnackBarState(false);
+      setShowSnackBar(true);
+      setSnackBarMessage("Something went wrong. Try again");
+    }
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!formState) {
       if (mobileNumber.length === 10) {
-       deliverOtp();
+        deliverOtp();
       } else {
         setError(true);
       }
     } else {
-      let otp = (
+      let otp =
         otpInputs.First +
-          otpInputs.Second +
-          otpInputs.Third +
-          otpInputs.Fourth +
-          otpInputs.Fifth +
-          otpInputs.Sixth
-      );
-      let data = { number: mobileNumber, otp:otp };
+        otpInputs.Second +
+        otpInputs.Third +
+        otpInputs.Fourth +
+        otpInputs.Fifth +
+        otpInputs.Sixth;
+      let data = { number: mobileNumber, otp: otp };
       setIsLoading(true);
       let { status, responseData } = await verifyOtp(data);
       if (status === 200) {
-        if(responseData.userStatus === false){
+        if (responseData.userStatus === false) {
           navigate("/updateuser");
-        } else{
+        } else {
           navigate(-1);
         }
-      } else if (status === 404){
+      } else if (status === 404) {
         setIsLoading(false);
         setSnackBarState(false);
         setShowSnackBar(true);
@@ -120,6 +120,12 @@ function Login() {
 
   return (
     <div className="loginContainer">
+      <button
+        className="loginContainerCloseButton"
+        onClick={() => navigate("/")}
+      >
+        <MdOutlineClose className="loginContainerCloseIcon" />
+      </button>
       <div className="loginWelcomeContainer">
         <img src={logo} alt="brand-logo" className="loginContainerBrandLogo" />
         <p className="loginBrandSub">Feel You'r Step</p>
@@ -227,7 +233,13 @@ function Login() {
                   />
                 ))}
               </div>
-              <button className="resendOtpButton" type="button" onClick={deliverOtp}>Resend OTP</button>
+              <button
+                className="resendOtpButton"
+                type="button"
+                onClick={deliverOtp}
+              >
+                Resend OTP
+              </button>
               <button className="loginFormSubmitButton" type="submit">
                 {isLoading ? (
                   <CircularProgress
@@ -243,6 +255,7 @@ function Login() {
           </motion.div>
         )}
       </div>
+
       <Snackbar
         open={showSnackBar}
         autoHideDuration={3000}

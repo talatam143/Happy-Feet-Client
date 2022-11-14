@@ -227,104 +227,101 @@ function SelectAddress() {
                 {addressList.map(
                   (eachAddress) =>
                     eachAddress.default === true && (
-                        <div
-                          className="modalDefaultAddressContainer"
-                          key={eachAddress.id}
+                      <div
+                        className="modalDefaultAddressContainer"
+                        key={eachAddress.id}
+                      >
+                        <input
+                          type="radio"
+                          id={eachAddress.id}
+                          value={eachAddress.id}
+                          name="address"
+                          onChange={changingAddress}
+                          checked={markedAddress === eachAddress.id}
+                        />
+                        <label
+                          htmlFor={eachAddress.id}
+                          className="modalDefaultAddressLabel"
                         >
-                          <input
-                            type="radio"
-                            id={eachAddress.id}
-                            value={eachAddress.id}
-                            name="address"
-                            onChange={changingAddress}
-                            checked={markedAddress === eachAddress.id}
-                          />
-                          <label
-                            htmlFor={eachAddress.id}
-                            className="modalDefaultAddressLabel"
-                          >
-                            <div className="modalDefaultAddressSubContainer">
-                              <div className="cartAddressNameContainer">
-                                <p className="cartAddressBoldParas">
-                                  {eachAddress.name}
-                                </p>
-                                <p className="modalAddressTypePara">
-                                  {eachAddress.type}
-                                </p>
-                              </div>
-                              <p className="cartAddressPara">
-                                {eachAddress.address}
+                          <div className="modalDefaultAddressSubContainer">
+                            <div className="cartAddressNameContainer">
+                              <p className="cartAddressBoldParas">
+                                {eachAddress.name}
                               </p>
-                              <p className="cartAddressPara">
-                                {eachAddress.locality}
-                              </p>
-                              <p className="cartAddressPara">
-                                {`${eachAddress.city}, ${eachAddress.state}, ${eachAddress.pincode}`}
-                              </p>
-                              <p
-                                className="cartAddressPara"
-                                style={{ marginTop: "10px" }}
-                              >
-                                Mobile:{" "}
-                                <span className="cartAddressBoldParas">
-                                  {eachAddress.customerMobileNumber}
-                                </span>{" "}
+                              <p className="modalAddressTypePara">
+                                {eachAddress.type}
                               </p>
                             </div>
-                          </label>
-                        </div>
+                            <p className="cartAddressPara">
+                              {eachAddress.address}
+                            </p>
+                            <p className="cartAddressPara">
+                              {eachAddress.locality}
+                            </p>
+                            <p className="cartAddressPara">
+                              {`${eachAddress.city}, ${eachAddress.state}, ${eachAddress.pincode}`}
+                            </p>
+                            <p
+                              className="cartAddressPara"
+                              style={{ marginTop: "10px" }}
+                            >
+                              Mobile:{" "}
+                              <span className="cartAddressBoldParas">
+                                {eachAddress.customerMobileNumber}
+                              </span>{" "}
+                            </p>
+                          </div>
+                        </label>
+                      </div>
                     )
                 )}
-
+                <p className="selectAddressSubHeadingParas">Others</p>
                 {addressList.map(
                   (eachAddress) =>
                     eachAddress.default !== true && (
-                      <>
-                        <p className="selectAddressSubHeadingParas">Others</p>
-                        <div
-                          className="modalDefaultAddressContainer"
-                          key={eachAddress.id}
-                        >
-                          <input
-                            type="radio"
-                            id={eachAddress.id}
-                            value={eachAddress.id}
-                            name="address"
-                            onChange={changingAddress}
-                            checked={markedAddress === eachAddress.id}
-                          />
-                          <label htmlFor={eachAddress.id}>
-                            <div className="modalDefaultAddressSubContainer">
-                              <div className="cartAddressNameContainer">
-                                <p className="cartAddressBoldParas">
-                                  {eachAddress.name}
-                                </p>
-                                <p className="modalAddressTypePara">
-                                  {eachAddress.type}
-                                </p>
-                              </div>
-                              <p className="cartAddressPara">
-                                {eachAddress.address}
+                      <div
+                        className="modalDefaultAddressContainer"
+                        key={eachAddress.id}
+                      >
+                        <input
+                          type="radio"
+                          id={eachAddress.id}
+                          value={eachAddress.id}
+                          name="address"
+                          onChange={changingAddress}
+                          checked={markedAddress === eachAddress.id}
+                        />
+                        <label htmlFor={eachAddress.id}>
+                          <div className="modalDefaultAddressSubContainer">
+                            <div className="cartAddressNameContainer">
+                              <p className="cartAddressBoldParas">
+                                {eachAddress.name}
                               </p>
-                              <p className="cartAddressPara">
-                                {eachAddress.locality}
-                              </p>
-                              <p className="cartAddressPara">
-                                {`${eachAddress.city}, ${eachAddress.state}, ${eachAddress.pincode}`}
-                              </p>
-                              <p
-                                className="cartAddressPara"
-                                style={{ marginTop: "10px" }}
-                              >
-                                Mobile:{" "}
-                                <span className="cartAddressBoldParas">
-                                  {eachAddress.customerMobileNumber}
-                                </span>{" "}
+                              <p className="modalAddressTypePara">
+                                {eachAddress.type}
                               </p>
                             </div>
-                          </label>
-                        </div>
-                      </>
+                            <p className="cartAddressPara">
+                              {eachAddress.address}
+                            </p>
+                            <p className="cartAddressPara">
+                              {eachAddress.locality}
+                            </p>
+                            <p className="cartAddressPara">
+                              {`${eachAddress.city}, ${eachAddress.state}, ${eachAddress.pincode}`}
+                            </p>
+                            <p
+                              className="cartAddressPara"
+                              style={{ marginTop: "10px" }}
+                            >
+                              Mobile:{" "}
+                              <span className="cartAddressBoldParas">
+                                {eachAddress.customerMobileNumber}
+                              </span>{" "}
+                            </p>
+                          </div>
+                        </label>
+                      </div>
                     )
                 )}
 

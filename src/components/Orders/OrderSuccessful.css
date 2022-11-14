@@ -1,0 +1,32 @@
+.orderSuccessfulContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+
+.orderSuccessfulSubContainer1 {
+  height: 50%;
+  background-color: #e63975;
+}
+
+.orderSuccessfulSubContainer2 {
+  height: 50%;
+  background-color: #e63975;
+}
+
+.para{
+    margin: auto;
+    font-size: 40px;
+    font-weight: 600;
+    color: aliceblue;
+    width: fit-content;
+}
+
+.para1{
+    margin: auto;
+    font-size: 20px;
+    font-weight: 600;
+    color: aliceblue;
+    width: fit-content;
+}

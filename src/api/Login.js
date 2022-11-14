@@ -5,7 +5,7 @@ import {
   successState,
   failedState,
 } from "../stateslices/pageStateSlice";
-import { setUser } from "../stateslices/userSlice";
+import { setUser,removeUser } from "../stateslices/userSlice";
 
 const server = process.env.REACT_APP_SERVER_URL;
 
@@ -79,5 +79,21 @@ export const updateUserAccount = async (data) => {
   } else {
     store.dispatch(failedState());
     return { responseData, status: response.status };
+  }
+};
+
+export const verifyUser = async () => {
+  let token = Cookies.get("HappyT");
+  const url = `${server}/verifyuser/`;
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await fetch(url,options)
+  if(response.status !==200){
+    store.dispatch(removeUser())
   }
 };

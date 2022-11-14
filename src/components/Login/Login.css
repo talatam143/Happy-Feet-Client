@@ -194,3 +194,15 @@
   flex-direction: column;
   align-items: center;
 }
+
+.loginContainerCloseButton{
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  right:10px;
+  top: 20px;
+}
+
+.loginContainerCloseIcon{
+  font-size: 40px;
+}

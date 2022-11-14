@@ -11,6 +11,7 @@ import { verifyCvv, getPayments } from "../../api/CustomerDetailsApi";
 import { ArrowLeft } from "../SVG/svgrepo";
 import { setCartPayment } from "../../stateslices/cartStateSlice";
 import "./Payment.css";
+import { placeOrder } from "../../api/OrdersApi";
 
 function Payment() {
   const [cardsList, setCardsList] = useState([]);
@@ -82,9 +83,19 @@ function Payment() {
     }
   };
 
-  const goToCheckout = () => {
-    if (cartState.isPaymentDone) {
-      console.log(cartState)
+  const goToCheckout = async () => {
+    if (
+      cartState.isPaymentDone &&
+      cartState.isAddressInitialized &&
+      cartState.isCartInitialized
+    ) {
+      let data = {
+        items: cartState.cartItems,
+        addressId: cartState.cartAddress.id,
+        paymentId: cartState.cartPayment.id,
+        priceDetails: cartState.cartPriceData,
+      };
+      const order = await placeOrder(data);
     } else {
       setVerifyError(true);
     }

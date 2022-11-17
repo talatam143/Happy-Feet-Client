@@ -100,3 +100,70 @@
     font-weight: 600;
     font-size: 20px;
   }
+
+  .orderConfirmOtpHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #e53170;
+    padding: 10px 5px;
+  }
+
+  .orderConfirmOtpButton{
+    background-color: transparent;
+    border: none;
+  }
+
+  .orderConfirmOtpCloseIcon{
+    font-size: 30px;
+    stroke-width: 1;
+    color: #33272a;
+  }
+
+  .orderConfirmOtpPara{
+    margin: 0;
+    color: #33272a;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .orderConfirmOtpModalInput{
+    width: 250px;
+    height: 40px;
+    margin: auto;
+    border: solid 2px #e53170;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .orderConfirmOtpModalInput::placeholder{
+    color: #e53170;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .orderConfirmOtpModalForm{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    align-items: center;
+  }
+
+  .orderConfirmOtpModalSubmitButton{
+    margin-top: 10px;
+    background-color: #e53170;
+    color: #fffffe;
+    border: none;
+   width: 70px;
+   height: 40px;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .orderConfirmOtpModalFormPara{
+    margin: 5px 10px 10px 5px;
+    text-align: center;
+    color: #594a4e;
+  }

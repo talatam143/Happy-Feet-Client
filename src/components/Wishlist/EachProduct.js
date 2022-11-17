@@ -4,17 +4,18 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { DeleteIcon } from "../SVG/svgrepo";
 
-
 import { addToCart } from "../../api/CartApi";
 import { removeFromWishList } from "../../api/WishListApi";
 import "./EachWishList.css";
+import { CircularProgress } from "@mui/material";
 
 function EachProduct(props) {
-  const { data, fetchWishListProducts,updateSnackBar } = props;
+  const { data, fetchWishListProducts, updateSnackBar } = props;
   const navigate = useNavigate();
   const user = useSelector((state) => state.userState);
   const [selectSize, setSelectSize] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
+  const [loadingStatus, setLoadingStatus] = useState(false);
 
   const handleRemoveWishList = async () => {
     const getCookie = Cookies.get("HappyT");
@@ -46,19 +47,22 @@ function EachProduct(props) {
     setSelectSize(true);
     if (selectedSize !== null) {
       const getNum = Cookies.get("num");
-        let productData = {
-          id: data._id,
-          quantity: 1,
-          size: selectedSize,
-          mobileNumber: getNum,
-        };
-        const { status, responseData } = await addToCart(productData);
-        if (status === 200) {
-          fetchWishListProducts();
-          updateSnackBar(true, responseData.message);
-        } else {
-          updateSnackBar(true, responseData.error);
-        }
+      let productData = {
+        id: data._id,
+        quantity: 1,
+        size: selectedSize,
+        mobileNumber: getNum,
+      };
+      setLoadingStatus(true);
+      const { status, responseData } = await addToCart(productData);
+      if (status === 200) {
+        fetchWishListProducts();
+        updateSnackBar(true, responseData.message);
+        setLoadingStatus(false);
+      } else {
+        updateSnackBar(true, responseData.error);
+        setLoadingStatus(false);
+      }
     }
   };
 
@@ -109,11 +113,17 @@ function EachProduct(props) {
           <DeleteIcon />
         </button>
         <button className="eachWishListAddToBagButton" onClick={addToBag}>
-          {" "}
-          Add to Cart
+          {loadingStatus ? (
+            <CircularProgress
+              sx={{ color: "#faeee7", marginLeft: "10px" }}
+              size={28}
+              thickness={5}
+            />
+          ) : (
+            "Add to Cart"
+          )}
         </button>
       </div>
-      
     </div>
   );
 }

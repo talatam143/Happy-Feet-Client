@@ -17,6 +17,7 @@ import "swiper/css/thumbs";
 import { ArrowLeft, ToggleWishListIcon } from "../SVG/svgrepo";
 import { addToCart } from "../../api/CartApi";
 import ProductViewSkeleton from "../Addons/ProductViewSkeleton";
+import { CircularProgress } from "@mui/material";
 
 function ViewProduct() {
   const params = useParams();
@@ -31,6 +32,7 @@ function ViewProduct() {
   const [cartError, setCartError] = useState(false);
   const [cartErrorMessage, setCartErrorMessage] = useState(false);
   const [addedToBag, setAddedToBag] = useState(false);
+  const [addTOBagButton, setAddTOBagButton] = useState("INITIAL");
   const [isWhishList, setIsWhishList] = useState(false);
   const [showSnackBar, setShowSnackBar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -68,10 +70,13 @@ function ViewProduct() {
             size: selectedSize,
             mobileNumber: getNum,
           };
+          setAddTOBagButton("LOADING");
           const { status, responseData } = await addToCart(data);
           if (status === 200) {
+            setAddTOBagButton("SUCCESS");
             setAddedToBag(true);
           } else {
+            setAddTOBagButton("SUCCESS");
             setAddedToBag(true);
             setCartError(true);
             setCartErrorMessage(responseData.error);
@@ -219,7 +224,15 @@ function ViewProduct() {
           </div>
           <div className="productViewButtonsContainer">
             <button className="productViewAddToBagButton" onClick={addToBag}>
-              {addedToBag ? "Go to Bag" : "Add to Bag"}
+              {addTOBagButton === "INITIAL" && "Add to Bag"}
+              {addTOBagButton === "LOADING" && (
+                <CircularProgress
+                  sx={{ color: "#ffffff", marginLeft: "10px" }}
+                  size={28}
+                  thickness={5}
+                />
+              )}
+              {addTOBagButton === "SUCCESS" && "Go to Bag"}
             </button>
             <button
               className="productViewWishlistButton"

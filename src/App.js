@@ -22,6 +22,8 @@ import SavedAddress from "./components/Profile/Saved Address/SavedAddress";
 import SavedCards from "./components/Profile/SavedCards/SavedCards";
 import OrderSuccessful from "./components/Orders/OrderSuccessful";
 import { verifyUser } from "./api/Login";
+import Orders from "./components/Orders/Orders";
+import ViewOrder from "./components/Orders/ViewOrder";
 
 function App() {
   const location = useLocation();
@@ -35,18 +37,18 @@ function App() {
       }
     }
     let getNumber = Cookies.get("num");
-    let getToken = Cookies.get("HappyT")
-    if(getToken !== undefined){
-      validateUser()
+    let getToken = Cookies.get("HappyT");
+    if (getToken !== undefined) {
+      validateUser();
     }
     if (getNumber !== undefined) {
       fetchWishList();
     }
   }, [location]);
 
-  const validateUser = async() =>{
-    await verifyUser()
-  }
+  const validateUser = async () => {
+    await verifyUser();
+  };
 
   const fetchWishList = async () => {
     await getWishList();
@@ -81,11 +83,13 @@ function App() {
           <Route path="/account" element={<Profile />} />
           <Route path="myaddress" element={<SavedAddress />} />
           <Route path="mycards" element={<SavedCards />} />
+          <Route path="myorders" element={<Orders />} />
+          <Route path="myorders/:id" element={<ViewOrder />} />
         </Route>
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ViewProduct />} />
       </Route>
-      <Route path="ordersuccess" element={<OrderSuccessful/>}/>
+      <Route path="ordersuccess" element={<OrderSuccessful />} />
       <Route path="/updateuser" element={<UpdateUser />} />
       <Route path="/login" element={<Login />} />
     </Routes>

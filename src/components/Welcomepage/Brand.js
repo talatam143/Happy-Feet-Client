@@ -11,6 +11,7 @@ function Brand(props) {
         src={`${process.env.REACT_APP_SERVER_URL}${details.image.filePath}`}
         alt="category-logo"
         className="eachBrandImage"
+        
       />
       <p className="eachBrandPara">{details.name}</p>
       </Link>

@@ -5,13 +5,18 @@ import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import CircularProgress from "@mui/material/CircularProgress";
 import { MdVerified } from "react-icons/md";
+import { Dialog } from "@mui/material";
+import { IoClose } from "react-icons/io5";
+import MuiAlert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 
 import CartSkeleton from "../Addons/CartSkeleton";
 import { verifyCvv, getPayments } from "../../api/CustomerDetailsApi";
 import { ArrowLeft } from "../SVG/svgrepo";
-import { setCartPayment } from "../../stateslices/cartStateSlice";
+import { setCartPayment, resetPayment, setOrderData } from "../../stateslices/cartStateSlice";
 import "./Payment.css";
 import { placeOrder } from "../../api/OrdersApi";
+import { sendOtp, verifyOtp } from "../../api/Login";
 
 function Payment() {
   const [cardsList, setCardsList] = useState([]);
@@ -22,6 +27,12 @@ function Payment() {
   const [paymentStatus, setPaymentStatus] = useState("INITIAL");
   const [paymentError, setPaymentError] = useState(false);
   const [verifyError, setVerifyError] = useState(false);
+  const [otpModal, setOtpModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showSnackBar, setShowSnackBar] = useState(false);
+  const [snackBarState, setSnackBarState] = useState(false);
+  const [snackBarMessage, setSnackBarMessage] = useState("");
+  const [otpValue, setOtpValue] = useState("");
   const cartState = useSelector((state) => state.cartState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,6 +43,7 @@ function Payment() {
     } else {
       navigate("/cart");
     }
+    dispatch(resetPayment());
   }, []);
 
   const fetchCards = async () => {
@@ -48,9 +60,16 @@ function Payment() {
   };
 
   const handleCvv = (e) => {
+    setVerifyError(false);
     setPaymentError(false);
     if (cvv.length <= 2) {
       setLocalCvv(e.target.value);
+    }
+  };
+
+  const handleOtpValue = (e) => {
+    if (otpValue.length <= 6) {
+      setOtpValue(e.target.value);
     }
   };
 
@@ -89,13 +108,22 @@ function Payment() {
       cartState.isAddressInitialized &&
       cartState.isCartInitialized
     ) {
-      let data = {
-        items: cartState.cartItems,
-        addressId: cartState.cartAddress.id,
-        paymentId: cartState.cartPayment.id,
-        priceDetails: cartState.cartPriceData,
-      };
-      const order = await placeOrder(data);
+      let num = Cookies.get("num");
+      let data = { number: num };
+      setIsLoading(true);
+      let { status, responseData } = await sendOtp(data);
+      if (status === 200) {
+        setOtpModal(true);
+        setIsLoading(false);
+        setSnackBarState(true);
+        setShowSnackBar(true);
+        setSnackBarMessage(responseData.message);
+      } else {
+        setIsLoading(false);
+        setSnackBarState(false);
+        setShowSnackBar(true);
+        setSnackBarMessage("Something went wrong. Try again");
+      }
     } else {
       setVerifyError(true);
     }
@@ -136,6 +164,47 @@ function Payment() {
     setPaymentStatus("INITIAL");
     setPaymentError(false);
     setVerifyError(false);
+  };
+
+  const handleVerifyOtp = async (e) => {
+    e.preventDefault();
+    let num = Cookies.get("num");
+    let otpData = { number: num, otp: otpValue };
+    setIsLoading(true);
+    let { status, responseData } = await verifyOtp(otpData);
+    if (status === 200) {
+      let orderData = {
+        items: cartState.cartItems,
+        addressId: cartState.cartAddress.id,
+        paymentId: cartState.cartPayment.id,
+        priceDetails: cartState.cartPriceData,
+        mobileNumber: num,
+      };
+      const { status, data } = await placeOrder(orderData);
+      if (status === 200) {
+        setIsLoading(false);
+        dispatch(setOrderData());
+        navigate("/ordersuccess");
+      } else {
+        setIsLoading(false);
+        setSnackBarState(false);
+        setShowSnackBar(true);
+        setOtpModal(false);
+        setSnackBarMessage(data.error);
+      }
+    } else if (status === 404) {
+      setIsLoading(false);
+      setSnackBarState(false);
+      setShowSnackBar(true);
+      setOtpModal(false);
+      setSnackBarMessage(responseData.error);
+    } else {
+      setIsLoading(false);
+      setSnackBarState(false);
+      setShowSnackBar(true);
+      setOtpModal(false);
+      setSnackBarMessage("Something went wrong. Try again");
+    }
   };
 
   return (
@@ -308,8 +377,20 @@ function Payment() {
               </p>
             </div>
           </div>
-          <button className="cartPlaceOrderButton" onClick={goToCheckout}>
-            CHECKOUT
+          <button
+            className="cartPlaceOrderButton"
+            onClick={goToCheckout}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <CircularProgress
+                sx={{ color: "#fffffe", marginLeft: "10px" }}
+                size={28}
+                thickness={5}
+              />
+            ) : (
+              "CHECKOUT"
+            )}
           </button>
           {verifyError && (
             <p className="cardCvvErrorMessage" style={{ textAlign: "center" }}>
@@ -318,6 +399,60 @@ function Payment() {
           )}
         </>
       )}
+      <Dialog open={otpModal} fullWidth>
+        <div className="orderConfirmOtpModal">
+          <div className="orderConfirmOtpHeader">
+            <p className="orderConfirmOtpPara">Confirm Order</p>
+            <button
+              className="orderConfirmOtpButton"
+              onClick={() => setOtpModal(false)}
+            >
+              <IoClose className="orderConfirmOtpCloseIcon" />
+            </button>
+          </div>
+          <form className="orderConfirmOtpModalForm" onSubmit={handleVerifyOtp}>
+          <p className="orderConfirmOtpModalFormPara">Enter 6 digit OTP sent to registered number to confirm order</p>
+            <input
+              type="number"
+              placeholder="Enter OTP"
+              name="otp"
+              className="orderConfirmOtpModalInput"
+              value={otpValue}
+              onChange={handleOtpValue}
+            />
+            <button
+              type="submit"
+              className="orderConfirmOtpModalSubmitButton"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <CircularProgress
+                  sx={{ color: "#fffffe", marginLeft: "10px" }}
+                  size={28}
+                  thickness={5}
+                />
+              ) : (
+                "Verify"
+              )}
+            </button>
+          </form>
+        </div>
+      </Dialog>
+      <Snackbar
+        open={showSnackBar}
+        autoHideDuration={3000}
+        onClose={() => setShowSnackBar(false)}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={() => setShowSnackBar(false)}
+          severity={snackBarState ? "success" : "error"}
+          sx={{ width: "100%" }}
+        >
+          {snackBarMessage}
+        </MuiAlert>
+      </Snackbar>
     </div>
   );
 }

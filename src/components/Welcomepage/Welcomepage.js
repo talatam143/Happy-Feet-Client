@@ -26,7 +26,7 @@ function Welcomepage() {
   const [categoriesList, setCategoriesList] = useState([]);
   const [brandsList, setBrandsList] = useState([]);
   const [colorsList, setColorsList] = useState([]);
-  const [remainingPageStatus, setRemainingPageStatus] = useState(false);
+  const [remainingPageStatus, setRemainingPageStatus] = useState("INITIAL");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -42,12 +42,13 @@ function Welcomepage() {
     let colorsNames = [];
     if (status === 200) {
       setCategoriesList(data.categoriesList);
+      setRemainingPageStatus("LOADING");
       const { remainingStatus, remainingData } = await getColorsAndBrands();
       if (remainingStatus === 200) {
         setBrandsList(remainingData.brandsList);
         setColorsList(remainingData.colorsList);
         setRemainingPageStatus(true);
-
+        setRemainingPageStatus("SUCCESS");
         data.categoriesList.map((eachCategory) =>
           categoriesNames.push(eachCategory.name)
         );
@@ -93,7 +94,8 @@ function Welcomepage() {
           </motion.div>
         </>
       )}
-      {remainingPageStatus && (
+      {remainingPageStatus === "LOADING" && <WelcomeSkeleton />}
+      {remainingPageStatus === "SUCCESS" && (
         <>
           <motion.div
             initial={{ opacity: 0, y: 100 }}
@@ -145,30 +147,31 @@ function Welcomepage() {
               </Link>
             ))}
           </div>
-        </>
-      )}
-      {pageState.success && (
-        <Box className="welcomePageAllProductsContainer" sx={{ boxShadow: 2 }}>
-          <div className="welcomePageAllProductsSubContainer">
-            <p className="welcomePageBagPara">
-              Don't know what to choose. Click on Shop All to view all our
-              collection.
-            </p>
-            <div className="welcomePageAllBagContainer">
-              <img
-                src={Bag}
-                alt="shoppingBag"
-                className="welcomePagebagImage"
-              />
-              <button
-                className="welcomePagebagButton"
-                onClick={() => navigate("/products")}
-              >
-                Shop All
-              </button>
+          <Box
+            className="welcomePageAllProductsContainer"
+            sx={{ boxShadow: 2 }}
+          >
+            <div className="welcomePageAllProductsSubContainer">
+              <p className="welcomePageBagPara">
+                Don't know what to choose. Click on Shop All to view all our
+                collection.
+              </p>
+              <div className="welcomePageAllBagContainer">
+                <img
+                  src={Bag}
+                  alt="shoppingBag"
+                  className="welcomePagebagImage"
+                />
+                <button
+                  className="welcomePagebagButton"
+                  onClick={() => navigate("/products")}
+                >
+                  Shop All
+                </button>
+              </div>
             </div>
-          </div>
-        </Box>
+          </Box>
+        </>
       )}
     </div>
   );

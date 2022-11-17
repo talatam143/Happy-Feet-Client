@@ -8,7 +8,7 @@ import { BiBookmarkHeart } from "react-icons/bi";
 import { BsTag } from "react-icons/bs";
 
 import { addCartItems, setCartPrice } from "../../stateslices/cartStateSlice";
-import { getCartItems } from "../../api/CartApi";
+import { getCartItems, removeFromCart } from "../../api/CartApi";
 import "./Cart.css";
 import CartSkeleton from "../Addons/CartSkeleton";
 import EachCartItem from "./EachCartItem";
@@ -20,6 +20,7 @@ function Cart() {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const pageState = useSelector((state) => state.pageState);
   const cartState = useSelector((state) => state.cartState);
+  const [outOfStockALert, setOutOfStockALert] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -47,11 +48,25 @@ function Cart() {
       if (tempPrice > 1000) {
         convenienceFee = 0;
       }
-      dispatch(addCartItems({ status: true, data: responseData.cartDetails }));
+      let filterOutOfStock = responseData.cartDetails.filter(
+        (eachItem) => eachItem.availableQuantity !== 0
+      );
+      let checkOutOfStock = responseData.cartDetails.filter(
+        (eachItem) => eachItem.availableQuantity === 0
+      );
+      if (checkOutOfStock.length > 0) {
+        setOutOfStockALert(true);
+        const getNum = Cookies.get("num");
+        for (let data of checkOutOfStock) {
+          let itemData = { id: data.id, size: data.size, number: getNum };
+          await removeFromCart(itemData);
+        }
+      }
+      dispatch(addCartItems({ status: true, data: filterOutOfStock }));
       dispatch(
         setCartPrice({
           status: true,
-          data: { Discount : 0, price: tempPrice, convenienceFee },
+          data: { Discount: 0, price: tempPrice, convenienceFee, couponId: "" },
         })
       );
     } else if (status === 202) {
@@ -120,11 +135,15 @@ function Cart() {
                   <hr className="cartPriceHR" />
                   <div className="cartPriceMiniParasContainer">
                     <p className="cartPriceMiniParas">Total MRP</p>
-                    <p className="cartPriceMiniParas">&#x20B9; {cartState.cartPriceData.price}</p>
+                    <p className="cartPriceMiniParas">
+                      &#x20B9; {cartState.cartPriceData.price}
+                    </p>
                   </div>
                   <div className="cartPriceMiniParasContainer">
                     <p className="cartPriceMiniParas">Discount on MRP</p>
-                    <p className="cartPriceMiniParas">-&#x20B9; {cartState.cartPriceData.Discount}</p>
+                    <p className="cartPriceMiniParas">
+                      -&#x20B9; {cartState.cartPriceData.Discount}
+                    </p>
                   </div>
                   <div className="cartPriceMiniParasContainer">
                     <p className="cartPriceMiniParas">Coupon Discount</p>
@@ -138,14 +157,19 @@ function Cart() {
                         <span className="greenFreeSpan">FREE</span>{" "}
                       </p>
                     ) : (
-                      <p className="cartPriceMiniParas">{cartState.cartPriceData.convenienceFee}</p>
+                      <p className="cartPriceMiniParas">
+                        {cartState.cartPriceData.convenienceFee}
+                      </p>
                     )}
                   </div>
                   <hr className="cartPriceHR" />
                   <div className="cartPriceMiniParasContainer">
                     <p className="cartTotalAmountPara">Total Amount</p>
                     <p className="cartTotalAmountPara">
-                      &#x20B9; {cartState.cartPriceData.price + cartState.cartPriceData.convenienceFee - cartState.cartPriceData.Discount}
+                      &#x20B9;{" "}
+                      {cartState.cartPriceData.price +
+                        cartState.cartPriceData.convenienceFee -
+                        cartState.cartPriceData.Discount}
                     </p>
                   </div>
                 </div>
@@ -181,6 +205,21 @@ function Cart() {
             >
               <MuiAlert elevation={6} severity="success" variant="filled">
                 {snackbarMessage}
+              </MuiAlert>
+            </Snackbar>
+            <Snackbar
+              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+              open={outOfStockALert}
+              autoHideDuration={3000}
+              onClose={() => setOutOfStockALert(false)}
+            >
+              <MuiAlert
+                elevation={6}
+                severity="error"
+                variant="filled"
+                onClose={() => setOutOfStockALert(false)}
+              >
+                Some items in your cart were out of stock
               </MuiAlert>
             </Snackbar>
           </div>

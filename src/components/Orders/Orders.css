@@ -1,0 +1,280 @@
+.ordersDetailsContainer {
+  margin-top: 70px;
+}
+
+.ordersNoOrdersContainer {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.noOrdersPara {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #33272a;
+}
+
+.OrderShopNowButton {
+  margin-top: 20px;
+  width: 200px;
+  height: 45px;
+  border-radius: 6px;
+  background-color: #ff8ba7;
+  border: solid 2px #33272a;
+  font-size: 20px;
+  font-weight: 600;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.orderLink {
+  text-decoration: none;
+  width: 94%;
+  margin: 10px 0;
+}
+
+.ordersDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.orderIdPara {
+  margin: 0 0 5px 0;
+  color: #594a4e;
+  font-size: 14px;
+}
+
+.orderIdSpan {
+  font-size: 15px;
+  font-weight: 500;
+  color: #33272a;
+}
+
+.eachOrderItemContainer {
+  display: flex;
+  align-items: flex-start;
+  background-color: #faeee7;
+  padding: 10px;
+  color: #33272a;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin: 5px 0;
+}
+
+.eachOrderItemImage {
+  width: 100px;
+  height: 120px;
+  border-radius: 6px;
+}
+
+.eachItemPara {
+  margin: 0 0 5px 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.eachItemNamePara {
+  margin: 0 0 5px 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #594a4e;
+}
+
+.eachItemArrowIcon {
+  position: absolute;
+  right: 0;
+  align-self: center;
+  font-size: 30px;
+  color: #33272a;
+  stroke-width: 0.6;
+  width: 60px;
+}
+
+.viewOrderDetailsContainer {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.viewOrderDetailsPaymentCards {
+  width: 83%;
+  background-color: #fffffe;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 20px 20px 10px 20px;
+}
+
+.orderPaymentCardParaB {
+  font-weight: 600;
+  font-size: 17px;
+  color: #33272a;
+  margin: 0;
+}
+
+.orderPaymentCardPara {
+  margin: 0;
+  color: #594a4e;
+  font-size: 15px;
+}
+
+.orderPaymentCardHr {
+  border: none;
+  height: 1px;
+  width: 100%;
+  background-color: #594a4e;
+  margin-top: 25px;
+}
+
+.orderPaymentCardLinks {
+  margin: 0;
+  color: #e53170;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+.orderPaymentCardLinkSpecial {
+  margin: 0;
+  color: #e53170;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.viewOrderItemImage {
+  width: 100px;
+  height: 120px;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+
+.viewOrderEachItemContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 5px;
+  background-color: #ffc6c7;
+  padding: 5px 0;
+}
+
+.viewOrderItemsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.viewOrderEachParaB {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #33272a;
+  margin-bottom: 5px;
+}
+.viewOrderEachPara {
+  margin: 0;
+  color: #594a4e;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.viewOrderEachParaContainer {
+  margin-left: 10px;
+  width: 100%;
+}
+
+.viewOrderEachParaS {
+  margin: 0;
+  color: #33272a;
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.viewOrderEachSpecificContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px 0 0;
+}
+
+.viewOrderPaymentDetailsContainer {
+  width: 100%;
+  background-color: #fffffe;
+  margin-top: 20px;
+}
+
+.viewOrderPaymentDetailsHeading {
+  font-size: 20px;
+  font-weight: 600;
+  color: #33272a;
+  margin: 10px 0 10px 10px;
+}
+
+.viewOrderPaymentDetailsHeadingTwo{
+  font-size: 16px;
+  font-weight: 600;
+  color: #33272a;
+  margin: 10px 0 10px 10px;
+}
+
+.viewOrderPaymentDetailsPara {
+  font-size: 14px;
+  color: #33272a;
+  margin: 0 0 5px 10px;
+}
+
+.viewOrderPaymentDetailsSubContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 10px;
+}
+
+.viewOrderPaymentDetailsParaB{
+  font-size: 16px;
+  font-weight: 500;
+  color: #33272a;
+  margin: 5px 0 5px 10px;
+}
+
+.viewOrderPaymentDetailsHR{
+  border: none;
+  background-color: #594a4e;
+  height: 0.1px;
+  width: 95%;
+}
+
+.viewOrderPaymentDetailsParaCard{
+  font-size: 15px;
+  color: #33272a;
+  font-weight: 500;
+  margin: 10px 20px 15px 20px;
+}
+
+
+.viewOrderPaymentDetailsSubContainerCard{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffc6c7;
+  width: 90%;
+  margin: auto;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.viewOrderAddressContainer{
+  width: 90%;
+  background-color: #ffc6c7;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 20px;
+}

@@ -85,7 +85,7 @@ function Profile() {
               >
                 <WishlistIcon color="#ff8ba7" size="40" /> My Wishlist{" "}
               </button>
-              <button className="accountSpecialButton">
+              <button className="accountSpecialButton" onClick={() => navigate("myorders")}>
                 <OrderBox color="#ff8ba7" size="40" /> Orders
               </button>
               <button className="accountSpecialButton">

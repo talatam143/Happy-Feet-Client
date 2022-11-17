@@ -7,6 +7,7 @@ import { removeFromCart, updateQuantity } from "../../api/CartApi";
 import { DeleteIcon } from "../SVG/svgrepo";
 import "./Cart.css";
 import { addToWishList } from "../../api/WishListApi";
+import { CircularProgress } from "@mui/material";
 
 const initialQuantityArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -16,35 +17,41 @@ function EachCartItem(props) {
   const [quantityModel, setQuantityModel] = useState(false);
   const [selectQuantity, setSelectQuantity] = useState(data.quantity);
   const [quantityArray, setQuantityArray] = useState([]);
+  const [loadingStatus, setLoadingStatus] = useState(false);
 
   useEffect(() => {
     if (data.availableQuantity > 10) {
       setQuantityArray(initialQuantityArray);
-    } else{
-      setQuantityArray(initialQuantityArray.slice(0,data.availableQuantity));
+    } else {
+      setQuantityArray(initialQuantityArray.slice(0, data.availableQuantity));
     }
-  }, []);
+  }, [data]);
 
   const updateCart = async () => {
+    setLoadingStatus(true);
     const getNum = Cookies.get("num");
     let itemData = { id: data.id, size: data.size, number: getNum };
     const { status, responseData } = await removeFromCart(itemData);
     if (status === 200) {
       fetchCart();
       updateSnackBar(true, responseData.message);
+      setLoadingStatus(false);
     }
   };
 
   const addWishList = async () => {
+    setLoadingStatus(true);
     const getNum = Cookies.get("num");
     const wishlistData = { mobileNumber: getNum, id: data.id };
     const { status } = await addToWishList(wishlistData);
     if (status === 200) {
+      setLoadingStatus(false);
       updateCart();
     }
   };
 
   const updateItem = async () => {
+    setLoadingStatus(true);
     const getNum = Cookies.get("num");
     let itemData = {
       id: data.id,
@@ -55,7 +62,7 @@ function EachCartItem(props) {
     const { status, responseData } = await updateQuantity(itemData);
     if (status === 200) {
       setQuantityModel(false);
-
+      setLoadingStatus(false);
       fetchCart();
       updateSnackBar(true, responseData.message);
     }
@@ -88,8 +95,13 @@ function EachCartItem(props) {
               setSelectQuantity(data.quantity);
               setQuantityModel(true);
             }}
+            disabled={data.availableQuantity === 0}
           >
-            <p className="eachCartItemQuantityPara">Qty : {data.quantity}</p>
+            {data.availableQuantity > 0 ? (
+              <p className="eachCartItemQuantityPara">Qty : {data.quantity}</p>
+            ) : (
+              <p className="eachCartItemQuantityPara">Out of Stock</p>
+            )}
           </button>
         </div>
       </div>
@@ -115,20 +127,30 @@ function EachCartItem(props) {
             </div>
           </div>
           <hr className="removeItemModalHR" />
-          <div>
-            <button
-              className="removeItemModalRemoveButton"
-              onClick={updateCart}
-            >
-              REMOVE
-            </button>
-            <button
-              className="removeItemModalWishlistButton"
-              onClick={addWishList}
-            >
-              MOVE TO WISHLIST
-            </button>
-          </div>
+          {loadingStatus ? (
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <CircularProgress
+                sx={{ color: "#e53170", mt: 1, mb: 1 }}
+                size={32}
+                thickness={6}
+              />
+            </div>
+          ) : (
+            <div>
+              <button
+                className="removeItemModalRemoveButton"
+                onClick={updateCart}
+              >
+                REMOVE
+              </button>
+              <button
+                className="removeItemModalWishlistButton"
+                onClick={addWishList}
+              >
+                MOVE TO WISHLIST
+              </button>
+            </div>
+          )}
         </div>
       </Modal>
       <Modal open={quantityModel}>
@@ -162,7 +184,15 @@ function EachCartItem(props) {
               disabled={selectQuantity === data.quantity}
               onClick={updateItem}
             >
-              Done
+              {loadingStatus ? (
+                <CircularProgress
+                  sx={{ color: "#faeee7", marginLeft: "10px" }}
+                  size={28}
+                  thickness={5}
+                />
+              ) : (
+                "Done"
+              )}
             </button>
           </div>
         </div>

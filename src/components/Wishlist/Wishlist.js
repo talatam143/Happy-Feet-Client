@@ -16,6 +16,7 @@ function Wishlist() {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [whishListItems, setWishListItems] = useState([]);
   const pageState = useSelector((state) => state.pageState);
+
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -6,10 +6,11 @@ export const cartStateSlice = createSlice({
     isCartInitialized: false,
     isAddressInitialized: false,
     isPaymentDone: false,
+    isOrderSuccess: false,
     cartItems: [],
     cartAddress: {},
     cartPayment: {},
-    cartPriceData: { Discount: 0, price: 0, convenienceFee: 0 },
+    cartPriceData: { Discount: 0, price: 0, convenienceFee: 0, couponId: "" },
   },
   reducers: {
     addCartItems: (state, payload) => {
@@ -27,14 +28,18 @@ export const cartStateSlice = createSlice({
       state.isPaymentDone = true;
       state.cartPayment = payload.payload;
     },
+    resetPayment: (state) => {
+      state.isPaymentDone = false;
+      state.cartPayment = {};
+    },
+    setOrderData: (state) => {
+      state.isOrderSuccess = true;
+    },
     resetCart: (state) => {
       state.isCartInitialized = false;
       state.isAddressInitialized = false;
       state.isPaymentDone = false;
-      state.cartItems = [];
-      state.cartAddress = {};
-      state.cartPayment = {};
-      state.cartPriceData = { Discount: 0, price: 0, convenienceFee: 0 };
+      state.isOrderSuccess = false;
     },
   },
 });
@@ -45,6 +50,8 @@ export const {
   setCartPrice,
   setCartPayment,
   resetCart,
+  resetPayment,
+  setOrderData,
 } = cartStateSlice.actions;
 
 export default cartStateSlice.reducer;

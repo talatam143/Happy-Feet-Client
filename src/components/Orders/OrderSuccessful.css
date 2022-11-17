@@ -3,30 +3,147 @@
   flex-direction: column;
   width: 100%;
   height: 100vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .orderSuccessfulSubContainer1 {
   height: 50%;
-  background-color: #e63975;
+  background-color: #ff8ba7;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .orderSuccessfulSubContainer2 {
   height: 50%;
-  background-color: #e63975;
+  background-color: #ff8ba7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 20px;
 }
 
-.para{
-    margin: auto;
-    font-size: 40px;
-    font-weight: 600;
-    color: aliceblue;
-    width: fit-content;
+.OrderPara {
+  margin: auto;
+  font-size: 26px;
+  font-weight: 800;
+  color: #e53170;
+  width: fit-content;
 }
 
-.para1{
-    margin: auto;
-    font-size: 20px;
-    font-weight: 600;
-    color: aliceblue;
-    width: fit-content;
+.OrderPara1 {
+  margin: auto;
+  font-size: 20px;
+  font-weight: 600;
+  color: #33272a;
+  width: fit-content;
+  line-height: 0.5;
+}
+
+.deliveryPara1 {
+  margin: auto;
+  font-size: 16px;
+  font-weight: 500;
+  color: #33272a;
+  width: fit-content;
+  line-height: 1;
+  text-align: center;
+  margin: 5px 10px 5px 10px;
+}
+
+.orderImagesContainer {
+  display: flex;
+  overflow-x: auto;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.logoOrderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.orderBrandSub {
+  font-family: "Dancing Script", cursive;
+  font-size: 20px;
+  font-weight: 900;
+  margin-top: 5px;
+}
+
+.orderImage {
+  margin: 5px;
+  width: 130px;
+  height: 130px;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.OrderContainerBrandLogo {
+  width: 60px;
+}
+
+.orderAddressContainer {
+  border-radius: 8px;
+  margin-top: 20px;
+  background: #ff8ba7;
+  box-shadow: -5px 5px 16px #e67d96, 5px -5px 16px #ff99b8;
+  width: 80%;
+  padding: 10px;
+}
+
+.addressParaHeading {
+  margin: 0;
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 17px;
+}
+
+.orderAddressParaBold {
+  margin: 0;
+  font-weight: 500;
+}
+.orderAddressPara {
+  margin: 0;
+}
+
+.ordersActionsButtonContainer{
+  margin-top: 30px;
+  display: flex;
+  width: 330px;
+  justify-content: space-between;
+}
+
+.orderActionButtons{
+  background-color: #FFFFFF;
+  color: #33272a;
+  border: none;
+  padding: 10px;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 4px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  display: flex;
+  align-items: center;
+}
+
+.orderActionIcons{
+  font-size: 24px;
+  margin-right: 10px;
+  color: #e53170;
+  stroke-width: 0.3;
+}
+
+.orderActionButtonsSpecial{
+  font-size: 22px;
+  margin-right: 10px;
+  color: #e53170;
+  stroke-width: 0.8;
 }

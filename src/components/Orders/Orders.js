@@ -5,24 +5,27 @@ import { ArrowLeft } from "../SVG/svgrepo";
 import { BiChevronRight } from "react-icons/bi";
 
 import "./Orders.css";
+import { Skeleton } from "@mui/material";
+import OrderSkeleton from "../Addons/OrderSkeleton";
 
 function Orders() {
   const navigate = useNavigate();
   const [ordersList, setOrdersList] = useState([]);
-  const [pageState, setPageState] = useState(false);
+  const [pageState, setPageState] = useState("INITIAL");
 
   useEffect(() => {
     fetchOrders();
   }, []);
 
   const fetchOrders = async () => {
+    setPageState("LOADING");
     const { status, data } = await getMyOrders();
     if (status === 404) {
       setOrdersList([]);
-      setPageState(true);
+      setPageState("SUCCESS");
     } else if (status === 200) {
       setOrdersList(data.data.order);
-      setPageState(true);
+      setPageState("SUCCESS");
     }
   };
 
@@ -37,7 +40,13 @@ function Orders() {
         </button>
         <p className="myAddressHeaderHeading">My Orders</p>
       </div>
-      {pageState && (
+      {(pageState === "INITIAL" || pageState === "LOADING") && (
+        <div style={{ marginTop: "70px" }}>
+          <OrderSkeleton />
+        </div>
+      )}
+
+      {pageState === "SUCCESS" && (
         <div>
           {ordersList.length > 0 ? (
             <div className="ordersDetailsContainer">

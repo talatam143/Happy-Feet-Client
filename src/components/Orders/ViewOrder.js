@@ -3,6 +3,7 @@ import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getSingleOrder } from "../../api/OrdersApi";
+import ViewOrderSkeleton from "../Addons/ViewOrderSkeleton";
 import { ArrowLeft } from "../SVG/svgrepo";
 
 function ViewOrder() {
@@ -16,6 +17,7 @@ function ViewOrder() {
   }, []);
 
   const fetchOrder = async () => {
+    setPageState("LOADING");
     let num = Cookies.get("num");
     let filter = num + "&" + params.id;
     const { status, data } = await getSingleOrder(filter);
@@ -39,6 +41,11 @@ function ViewOrder() {
         </button>
         <p className="myAddressHeaderHeading">My Orders</p>
       </div>
+      {(pageState === "INITIAL" || pageState === "LOADING") && (
+        <div style={{ marginTop: "70px" }}>
+          <ViewOrderSkeleton />
+        </div>
+      )}
       {pageState === "SUCCESS" && (
         <div className="viewOrderDetailsContainer">
           <div className="viewOrderDetailsPaymentCards">

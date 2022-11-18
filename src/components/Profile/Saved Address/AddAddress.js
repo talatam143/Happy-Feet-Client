@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Dialog from "@mui/material/Dialog";
 import { IoClose } from "react-icons/io5";
 import Cookies from "js-cookie";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -8,7 +7,6 @@ import "./AddAddress.css";
 import { addAddress } from "../../../api/CustomerDetailsApi";
 
 const initialFormData = {
-  mobileNumber: Cookies.get("num"),
   name: "",
   addressMobileNumber: "",
   pincode: "",
@@ -21,7 +19,7 @@ const initialFormData = {
 };
 
 function AddAddress(props) {
-  const { dialogState, closeDialog } = props;
+  const { closeDialog } = props;
   const [formData, setFormData] = useState(initialFormData);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -33,6 +31,7 @@ function AddAddress(props) {
   };
 
   const handleFormChange = (e) => {
+    setError(false);
     if (e.target.name === "defaultAddress") {
       if (e.target.checked === true) {
         setFormData({ ...formData, [e.target.name]: true });
@@ -44,7 +43,10 @@ function AddAddress(props) {
     }
   };
 
+  console.log(formData);
+
   const addNewAddress = async (e) => {
+    e.preventDefault();
     if (formData.addressMobileNumber.length !== 10) {
       setError(true);
       setErrorMessage("Enter valid Mobile number");
@@ -52,9 +54,10 @@ function AddAddress(props) {
       setError(true);
       setErrorMessage("Enter valid Pincode");
     } else {
-      e.preventDefault();
       setApiState("LOADING");
-      const { status, data } = await addAddress(formData);
+      let sendData = formData;
+      sendData.mobileNumber = Cookies.get("num");
+      const { status, data } = await addAddress(sendData);
       if (status === 200) {
         setFormData(initialFormData);
         setApiState("SUCCESS");
@@ -68,167 +71,165 @@ function AddAddress(props) {
   };
 
   return (
-    <Dialog open={dialogState} maxWidth="xl" fullWidth>
-      <div>
-        <div className="addNewAddressHeaderContainer">
-          <p className="addNewAddressHeaderPara">Add new address</p>
-          <button
-            onClick={handleCloseDialog}
-            style={{ backgroundColor: "transparent", border: "none" }}
-          >
-            <IoClose style={{ fontSize: "30px" }} />
-          </button>
-        </div>
-        <form className="addNewAddressForm" onSubmit={addNewAddress}>
-          <input
-            placeholder="Name"
-            className="addressInput"
-            name="name"
-            type="text"
-            value={formData.name}
-            onChange={handleFormChange}
-            required
-          />
-          <input
-            placeholder="Mobile Number"
-            className="addressInput"
-            name="addressMobileNumber"
-            type="number"
-            value={formData.addressMobileNumber}
-            onChange={handleFormChange}
-            required
-          />
-          <input
-            placeholder="Pincode"
-            className="addressInput"
-            name="pincode"
-            type="number"
-            value={formData.pincode}
-            onChange={handleFormChange}
-            required
-          />
-          <input
-            placeholder="Address"
-            className="addressInput"
-            name="address"
-            type="text"
-            value={formData.address}
-            onChange={handleFormChange}
-            required
-          />
-          <input
-            placeholder="Locality"
-            className="addressInput"
-            name="locality"
-            type="text"
-            value={formData.locality}
-            onChange={handleFormChange}
-            required
-          />
-          <input
-            placeholder="City"
-            className="addressInput"
-            name="city"
-            type="text"
-            value={formData.city}
-            onChange={handleFormChange}
-            required
-          />
-          <input
-            placeholder="State"
-            className="addressInput"
-            name="state"
-            type="text"
-            value={formData.state}
-            onChange={handleFormChange}
-            required
-          />
-          <div className="addNewAddressTypeContainer">
-            <p className="addNewAddressTypePara">Type</p>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                width: "100%",
-              }}
-            >
-              <div style={{ marginBottom: "10px" }}>
-                <input
-                  type="radio"
-                  name="type"
-                  value="Home"
-                  onChange={handleFormChange}
-                  id="homeRadioId"
-                  className="radioInputStyle"
-                  required
-                />
-                <label
-                  htmlFor="homeRadioId"
-                  style={{
-                    fontWeight: 500,
-                    fontSize: "16px",
-                    color: "#33272a",
-                  }}
-                >
-                  Home
-                </label>
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  name="type"
-                  value="Office or Others"
-                  onChange={handleFormChange}
-                  id="othersRadioId"
-                  className="radioInputStyle"
-                  required
-                />
-                <label
-                  htmlFor="othersRadioId"
-                  style={{
-                    fontWeight: 500,
-                    fontSize: "16px",
-                    color: "#33272a",
-                  }}
-                >
-                  Office or Others
-                </label>
-              </div>
-            </div>
-          </div>
-          <div className="checkbox-con">
-            <p className="addNewAddressTypePara">Default Address </p>
-            <input
-              id="checkbox"
-              type="checkbox"
-              name="defaultAddress"
-              onChange={handleFormChange}
-            />
-          </div>
+    <div>
+      <div className="addNewAddressHeaderContainer">
+        <p className="addNewAddressHeaderPara">Add new address</p>
+        <button
+          onClick={handleCloseDialog}
+          style={{ backgroundColor: "transparent", border: "none" }}
+        >
+          <IoClose style={{ fontSize: "30px" }} />
+        </button>
+      </div>
+      <form className="addNewAddressForm" onSubmit={addNewAddress}>
+        <input
+          placeholder="Name"
+          className="addressInput"
+          name="name"
+          type="text"
+          value={formData.name}
+          onChange={handleFormChange}
+          required
+        />
+        <input
+          placeholder="Mobile Number"
+          className="addressInput"
+          name="addressMobileNumber"
+          type="number"
+          value={formData.addressMobileNumber}
+          onChange={handleFormChange}
+          required
+        />
+        <input
+          placeholder="Pincode"
+          className="addressInput"
+          name="pincode"
+          type="number"
+          value={formData.pincode}
+          onChange={handleFormChange}
+          required
+        />
+        <input
+          placeholder="Address"
+          className="addressInput"
+          name="address"
+          type="text"
+          value={formData.address}
+          onChange={handleFormChange}
+          required
+        />
+        <input
+          placeholder="Locality"
+          className="addressInput"
+          name="locality"
+          type="text"
+          value={formData.locality}
+          onChange={handleFormChange}
+          required
+        />
+        <input
+          placeholder="City"
+          className="addressInput"
+          name="city"
+          type="text"
+          value={formData.city}
+          onChange={handleFormChange}
+          required
+        />
+        <input
+          placeholder="State"
+          className="addressInput"
+          name="state"
+          type="text"
+          value={formData.state}
+          onChange={handleFormChange}
+          required
+        />
+        <div className="addNewAddressTypeContainer">
+          <p className="addNewAddressTypePara">Type</p>
           <div
             style={{
               display: "flex",
-              alignItems: "center",
               flexDirection: "column",
-              justifyContent: "center",
+              width: "100%",
             }}
           >
-            <button type="submit" className="addAddressSubmitButton">
-              {apiState === "SUCCESS" ? (
-                <CircularProgress
-                  size={30}
-                  thickness={6}
-                  sx={{ color: "#faeee7" }}
-                />
-              ) : (
-                "Add Address"
-              )}
-            </button>
-            {error && <p className="cardCvvErrorMessage">{errorMessage}</p>}
+            <div style={{ marginBottom: "10px" }}>
+              <input
+                type="radio"
+                name="type"
+                value="Home"
+                onChange={handleFormChange}
+                id="homeRadioId"
+                className="radioInputStyle"
+                required
+              />
+              <label
+                htmlFor="homeRadioId"
+                style={{
+                  fontWeight: 500,
+                  fontSize: "16px",
+                  color: "#33272a",
+                }}
+              >
+                Home
+              </label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                name="type"
+                value="Office or Others"
+                onChange={handleFormChange}
+                id="othersRadioId"
+                className="radioInputStyle"
+                required
+              />
+              <label
+                htmlFor="othersRadioId"
+                style={{
+                  fontWeight: 500,
+                  fontSize: "16px",
+                  color: "#33272a",
+                }}
+              >
+                Office or Others
+              </label>
+            </div>
           </div>
-        </form>
-      </div>
-    </Dialog>
+        </div>
+        <div className="checkbox-con">
+          <p className="addNewAddressTypePara">Default Address </p>
+          <input
+            id="checkbox"
+            type="checkbox"
+            name="defaultAddress"
+            onChange={handleFormChange}
+          />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <button type="submit" className="addAddressSubmitButton">
+            {apiState === "SUCCESS" ? (
+              <CircularProgress
+                size={30}
+                thickness={6}
+                sx={{ color: "#faeee7" }}
+              />
+            ) : (
+              "Add Address"
+            )}
+          </button>
+          {error && <p className="cardCvvErrorMessage">{errorMessage}</p>}
+        </div>
+      </form>
+    </div>
   );
 }
 

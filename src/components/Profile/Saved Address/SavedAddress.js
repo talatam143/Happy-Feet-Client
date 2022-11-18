@@ -18,6 +18,7 @@ import "./SavedAddress.css";
 import CartSkeleton from "../../Addons/CartSkeleton";
 import EachSavedAddress from "./EachSavedAddress";
 import AddAddress from "./AddAddress";
+import { Dialog } from "@mui/material";
 
 function SavedAddress() {
   const navigate = useNavigate();
@@ -105,7 +106,7 @@ function SavedAddress() {
               {addressList.map((eachAddress) => (
                 <EachSavedAddress
                   eachAddress={eachAddress}
-                  deleteAddressStatus= {deleteAddress}
+                  deleteAddressStatus={deleteAddress}
                   key={eachAddress.id}
                   showActionsButtons={
                     selectedId === eachAddress.id ? true : false
@@ -123,7 +124,9 @@ function SavedAddress() {
           )}
         </div>
       )}
-      <AddAddress dialogState={newAddressDialog} closeDialog={closeDialog} />
+      <Dialog open={newAddressDialog} maxWidth="xl" fullWidth>
+        <AddAddress closeDialog={closeDialog} />
+      </Dialog>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         open={showSnackBar}

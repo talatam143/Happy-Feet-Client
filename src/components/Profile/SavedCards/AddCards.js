@@ -9,7 +9,6 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { addCard } from "../../../api/CustomerDetailsApi";
 
 const initialFormData = {
-  mobileNumber: Cookies.get("num"),
   cardholder: "",
   number: "",
   cvv: "",
@@ -56,7 +55,8 @@ function AddCard(props) {
   };
 
   const handleFormChange = (e) => {
-    setError(false)
+    setError(false);
+
     if (e.target.name === "defaultCard") {
       if (e.target.checked === true) {
         setFormData({ ...formData, [e.target.name]: true });
@@ -80,6 +80,7 @@ function AddCard(props) {
       setApiState("LOADING");
       let sendData = formData;
       sendData.validThru = selectedMonth + selectedYear;
+      sendData.mobileNumber = Cookies.get("num");
       const { status, data } = await addCard(sendData);
       if (status === 200) {
         setFormData(initialFormData);

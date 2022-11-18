@@ -28,8 +28,6 @@ function ViewOrder() {
       setPageState("ERROR");
     }
   };
-  console.log(details);
-
   return (
     <div className="ordersContainer">
       <div className="accountMyAddressHeaderContainer">

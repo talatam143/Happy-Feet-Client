@@ -5,7 +5,6 @@ import { ArrowLeft } from "../SVG/svgrepo";
 import { BiChevronRight } from "react-icons/bi";
 
 import "./Orders.css";
-import { Skeleton } from "@mui/material";
 import OrderSkeleton from "../Addons/OrderSkeleton";
 
 function Orders() {

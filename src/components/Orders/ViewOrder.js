@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Cookies from "js-cookie";
 import moment from "moment/moment";
 import React, { useEffect, useState } from "react";

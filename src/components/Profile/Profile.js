@@ -44,6 +44,8 @@ function Profile() {
     navigate("/");
   };
 
+  
+
   return (
     <>
       <div>
@@ -52,6 +54,11 @@ function Profile() {
             <p className="accountHeading">My Account</p>
             <div className="accountDetailsContainer">
               {userDetails.name !== undefined ? (
+                userDetails.name.split(" ").length === 1 ?
+                <p className="accountDetailsUserIcon">
+                  {userDetails.name.split(" ")[0][0]}
+                </p>
+                :
                 <p className="accountDetailsUserIcon">
                   {userDetails.name.split(" ")[0][0] +
                     userDetails.name.split(" ")[1][0]}

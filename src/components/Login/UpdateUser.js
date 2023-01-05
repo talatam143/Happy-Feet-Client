@@ -29,11 +29,11 @@ function UpdateUser() {
     if (isLoggedIn === undefined) {
       navigate("/login");
     } else {
-      fetchUserAccount();
+      fetchUserAccountDetails();
     }
   }, []);
 
-  const fetchUserAccount = async () => {
+  const fetchUserAccountDetails = async () => {
     const { status, responseData } = await getAccount();
     if (status === 200) {
       setUserData({ ...userData, ["mobileNumber"]: Cookies.get("num") });
